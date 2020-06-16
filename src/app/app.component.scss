@@ -1,0 +1,30 @@
+
+
+  ion-menu {
+    --ion-background-color: #FAFAFA !important;
+    --ion-text-color: #7A7A7A !important;
+  
+    ion-toolbar {
+      --background: #FAFAFA !important;
+    }
+  
+    
+  }
+  ion-list {/* optional, but it needs when you use gradient as a background color.*/
+    background: transparent !important;
+  }
+  mat-sidenav {
+    width: 20vw;
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #EAECF2;
+    opacity: 1;
+  }
+
+  .mat-drawer-container{
+    position: initial !important;
+  }
+
+  .usermenu{
+    border:0;
+    padding:18px;
+  }

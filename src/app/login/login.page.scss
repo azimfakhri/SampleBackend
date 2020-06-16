@@ -1,0 +1,52 @@
+.login-bg{
+    top: -16px;
+    left: -17px;
+    width: 737px;
+    height: 700px;
+    background-image: url('../../assets/bg-min.jpg') !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-login{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #EAECF2;
+    border-radius: 4px;
+    opacity: 1;
+    padding: 30px;
+}
+
+.login-padding{
+    margin:150px 180px;
+}
+
+.submit-btn{
+    --background: #004CFF !important;
+}
+
+.login-title-padding{
+    padding: 70px !important;
+}
+
+.login-title{
+    color: #FFF;
+    font-size: 25px;
+    font-family: var(--ion-font-family,inherit) !important;
+}
+
+.login-desc{
+    color: #000;
+    font-size: 20px;
+    margin-top: 400px;
+}
+
+.underline-bold{
+    border-bottom: 3px #004CFF solid;
+    font-size: 18px;
+}
+
+.pwinput{
+    width: 70%;
+}

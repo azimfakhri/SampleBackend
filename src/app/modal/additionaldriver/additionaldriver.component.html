@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar class="modalHeader">
+    <ion-title>
+      {{title}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="inner-content">
+  <div>
+    <form [formGroup]="driverForm">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col class="basicDetails ion-no-padding">
+            <ion-row>
+              <ion-col>
+                <div>Name as per NRIC</div>
+                <ion-input formControlName="name" class="input-style ion-text-uppercase"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>ID Type</div>
+                <mat-select placeholder="Select" name="idtype" formControlName="idtype" (selectionChange)="idChanged()">
+                  <mat-option *ngFor="let ct of CustomerIDType" [value]="ct.value">
+                    {{ct.description}}
+                  </mat-option>
+                </mat-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>ID Number</div>
+              <ion-input (keyup)="addDash()" placeholder="880808145123" class="input-style ion-text-uppercase" formControlName="idNo" [maxlength]="iclength"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>Gender</div>
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                  <mat-radio-button *ngFor="let r of genderList" [value]="r.value">
+                    {{r.description}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>Date of Birth</div>
+                <ion-row>
+                  <ion-col>
+                    <mat-select name="dobd" formControlName="dobd" [disabled]="isNric">
+                      <mat-option *ngFor="let id of dayList" [value]="id">
+                        {{id}}
+                      </mat-option>
+                    </mat-select>
+                  </ion-col>
+                  <ion-col>
+                    <mat-select name="dobm" formControlName="dobm" [disabled]="isNric">
+                      <mat-option *ngFor="let id of monthList" [value]="id.value">
+                        {{id.description}}
+                      </mat-option>
+                    </mat-select>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input formControlName="doby" minlength="4" maxlength="4" pattern="[0-9]*" class="input-style" [disabled]="isNric"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col class="advancedDetails ion-no-padding">
+            <ion-row>
+              <ion-col>
+                <div id="advDiv">Advance Details</div>
+                <div>Relationship</div>
+                <mat-select placeholder="Select" name="relation" formControlName="relationship">
+                  <mat-option *ngFor="let rl of relationList" [value]="rl.code">
+                    {{rl.relationdescription}}
+                  </mat-option>
+                </mat-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>Occupation</div>
+                <mat-select placeholder="Select" name="occupation" formControlName="occupation">
+                  <mat-option *ngFor="let occ of occupationList" [value]="occ.code">
+                    {{occ.description}}
+                  </mat-option>
+                </mat-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>Driving Experience</div>
+              <ion-input formControlName="drivingExp" type="number" min="1" max="99" pattern="^([1-9]?[0-9]|99)$" class="input-style"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    
+  </div>
+</div>
+<ion-footer>
+  <ion-toolbar >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button *ngIf="isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Add</button>
+          <button *ngIf="!isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Save</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

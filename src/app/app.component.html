@@ -1,0 +1,39 @@
+
+  
+<ion-app>
+  <ion-header *ngIf="CheckLoggedIn()">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="primary" (click)="sideNav.toggle()"><ion-icon slot="icon-only" name="menu"></ion-icon></ion-button>
+      </ion-buttons>
+      <img slot="start" src="assets/logo.svg" width="30px" style="display:inline-block" height="30px"/>
+      <ion-title slot="start">
+        MTS
+      </ion-title>
+      <ion-buttons slot="end">
+        <!-- <ion-button fill="solid" color="warning" (click)="logout()">Logout</ion-button> -->
+        {{getLoginID()}}
+        <mat-select class="usermenu">
+          <mat-option (click)="profile()">
+            My Profile
+          </mat-option>
+          <mat-option (click)="logout()">
+            Logout
+          </mat-option>
+        </mat-select>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <mat-sidenav-container autosize>
+    <mat-sidenav #sideNav [opened]="CheckLoggedIn()" mode="side">
+      <app-sidenav *ngIf="CheckLoggedIn()"></app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content style="margin-bottom: 700px;">
+      <ion-router-outlet id="content1" class="pane-margin"></ion-router-outlet>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <app-footer *ngIf="CheckLoggedIn()"></app-footer>
+
+</ion-app>
+

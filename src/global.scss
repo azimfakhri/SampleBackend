@@ -1,0 +1,222 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "../src/theme/theme.scss";
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+//@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+//@import "~@angular/material/prebuilt-themes/purple-green.css";
+.pg-title{
+    color:#004CFF;
+    line-height: 10px;
+}
+.form-border{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #EAECF2;
+    border-radius: 4px;
+    opacity: 0.86;
+}
+
+.form-padding{
+    padding: 35px;
+}
+
+.form-footer{
+    background: #FBFCFE 0% 0% no-repeat padding-box;
+    border-radius: 0px 0px 4px 4px;
+    opacity: 1;
+    padding: 10px 40px;
+    width: 100%;
+    height: 60px;
+}
+
+.padding-content{
+    --padding-start: 15vh !important;
+    --padding-end: 15vh !important;
+  }
+
+  .arrow-padding{
+      padding: 0 10px !important;
+  }
+
+  .bold{
+      font-weight: bold !important;
+  }
+
+  .divider-padding{
+      padding:14px 0 10px 0;
+  }
+
+  .mat-radio-button{
+    border: 1px solid #EAECF2;
+    border-radius: 4px;
+    opacity: 1;
+    padding: 12px;
+    margin: 0 10px 0 0;
+}
+
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #004CFF!important;   /*inner circle color change*/
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#004CFF!important; /*outer ring color change*/
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+   
+    background-color: #004CFF !important;
+}
+
+.mat-select{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #EAECF2;
+    border-radius: 4px;
+    opacity: 1;
+    height: 40px;
+    padding: 10px 0 10px 8px;
+    margin: 0 0 10px 0 !important;
+}
+
+.mat-button-toggle-checked {
+    background: #004CFF 0% 0% no-repeat padding-box;
+    border-radius: 4px 0px 0px 4px;
+    opacity: 1;
+    color: white !important;
+}
+
+.mat-button-toggle{
+    font-family: var(--ion-font-family,inherit);
+    width:166px;
+}
+.mat-expansion-panel{
+    color:#252525;
+}
+.mat-expansion-panel-header[aria-disabled=true]{
+    color:#252525 !important;
+}
+
+.mat-expansion-panel, .mat-expansion-panel-header{
+    font-family: var(--ion-font-family,inherit) !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+    background: #004CFF 0% 0% no-repeat padding-box !important;
+    border-radius: 4px 4px 0px 0px;
+    opacity: 1;
+}
+
+.alert-title.sc-ion-alert-md{
+    color:#004CFF !important;
+}
+.alert-message.sc-ion-alert-md{
+    font-size: 14px !important;
+}
+
+.ion-invalid, .mat-select-invalid, mat-select.ng-invalid {
+    border: 2px solid red !important;
+}
+
+.native-input:disabled{
+    background: #F2F5FA ;
+    color:#252525;
+    opacity: 1 !important;
+ }
+
+ .mat-select.mat-select-disabled{
+    background: #F2F5FA !important;
+    opacity: 1 !important;
+ }
+ .mat-select-disabled .mat-select-value{
+    color:#252525 !important;
+ }
+
+ .input-style{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #EAECF2;
+    border-radius: 4px;
+    opacity: 1;
+    margin:0 0 10px 0!important;
+}
+
+.proceed-btn-form{
+    background: #004CFF 0% 0% no-repeat padding-box;
+    border-radius: 30px !important;
+    opacity: 1;
+    color: white;
+    float: right;
+}
+
+.back-btn-form{
+    background: #FBFCFE 0% 0% no-repeat padding-box;
+    border-radius: 30px !important;
+    opacity: 1;
+    color: #7A7A7A;
+    float: right;
+    margin:0px 15px !important
+}
+.back-btn-form:hover{
+    border: solid 1px #7A7A7A !important;
+}
+.back-icon{
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+ion-modal.auto-height {
+    &.bottom {
+        align-items: flex-end;
+    }
+    --width:1000px;
+    --height: auto;
+
+    .ion-page {
+        position: relative;
+        display: block;
+        contain: content;
+
+        .inner-content {
+            max-height: 80vh;
+            overflow: auto;
+        }
+    }
+}
+
+.mat-button:disabled{
+    color:#fff !important;
+    opacity: 0.4;
+}
+
+.detailTxt{
+    color:#7A7A7A;
+    font-size: 12px;
+  }
+
+  .image-preview{
+      padding:20px 0;
+  }
