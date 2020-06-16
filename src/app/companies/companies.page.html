@@ -5,11 +5,15 @@
     <mat-divider></mat-divider>
   </div>
   
-  <button mat-flat-button color="primary" type="button" (click)="AddCompany()">Add Company</button>
+  <ion-button mat-flat-button color="primary" (click)="AddCompany()">Add Company</ion-button>
   <mat-list>
     <mat-list-item *ngFor="let com of companies">
+      <mat-divider></mat-divider>
       <img matListAvatar src={{com.logo}}>
       <div mat-line>{{com.name}}</div>
+      <button mat-icon-button color="warning" (click)="ResetPassword(com)" aria-label="Reset password">
+        <mat-icon>security</mat-icon>
+      </button>
     </mat-list-item>
   </mat-list>
 </ion-content>

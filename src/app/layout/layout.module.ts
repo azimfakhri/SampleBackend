@@ -24,6 +24,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 /************************************************************************/
 
 const AngularMatModules = [
@@ -53,6 +54,7 @@ const AngularMatModules = [
     FormsModule,
     IonicModule,
     ...AngularMatModules,
+    NgMaterialMultilevelMenuModule
   ],
   declarations: [
     SidenavComponent,

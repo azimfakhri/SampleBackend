@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddcompanyComponent } from '../modal/addcompany/addcompany.component';
+import { ResetpasswordComponent } from '../modal/resetpassword/resetpassword.component';
 
 @Component({
   selector: 'app-companies',
@@ -31,6 +32,25 @@ export class CompaniesPage implements OnInit {
       component: AddcompanyComponent,
       backdropDismiss:false,
       cssClass:'auto-height',
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      //console.log(res);
+      if(res.data){
+       
+      } 
+    });
+    return await modal.present();
+  }
+
+  async ResetPassword(com){
+    const modal = await this.modalCtrl.create({
+      component: ResetpasswordComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps:{
+       com:com
+     }
     });
     modal.onDidDismiss()
     .then((res) => {

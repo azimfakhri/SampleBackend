@@ -111,8 +111,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button *ngIf="isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Add</button>
-          <button *ngIf="!isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Save</button>
+          <ion-button *ngIf="isAdd" class="proceed-btn-form" type="button" (click)="proceed()">Add</ion-button>
+          <ion-button *ngIf="!isAdd" class="proceed-btn-form" type="button" (click)="proceed()">Save</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

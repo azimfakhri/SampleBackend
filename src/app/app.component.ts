@@ -9,6 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class AppComponent {
     private navctrl: NavController,
     public idle: Idle,
     public keepalive: Keepalive,
-    private alertCtrl:AlertController
+    private notification:NotificationService
   ) {
     this.initializeApp();
 
@@ -41,7 +42,7 @@ export class AppComponent {
     
     idle.onIdleStart.subscribe(() => { 
       this.idleState = 'You\'ve gone idle!';
-      this.alertNotification(this.idleState,'You will be auto log out after 30 Seconds if there is inactivity.');
+      notification.alertNotification(this.idleState,'You will be auto log out after 30 Seconds if there is inactivity.');
     });
 
     idle.onIdleEnd.subscribe(() => {
@@ -103,12 +104,4 @@ export class AppComponent {
     this.navctrl.navigateRoot('/userprofile',{replaceUrl:true});
   }
 
-  async alertNotification(title: string, msg: string) {
-    let alert = await this.alertCtrl.create({
-     header: title,
-     message: msg,
-     buttons:['Done']
-    });
-    alert.present();
-  }
 }

@@ -20,14 +20,25 @@ import { AdditionaldriverComponent } from './modal/additionaldriver/additionaldr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { AddcompanyComponent } from './modal/addcompany/addcompany.component';
+import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
+import { NotificationService } from './services/notification.service';
 
 
 export function tokenGetter() {
   return sessionStorage.getItem("user_token");
 }
 @NgModule({
-  declarations: [AppComponent,AdditionaldriverComponent,AddcompanyComponent],
-  entryComponents: [AdditionaldriverComponent,AddcompanyComponent],
+  declarations: [
+    AppComponent,
+    AdditionaldriverComponent,
+    AddcompanyComponent,
+    ResetpasswordComponent
+  ],
+  entryComponents: [
+    AdditionaldriverComponent,
+    AddcompanyComponent,
+    ResetpasswordComponent
+  ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,
     HttpClientModule,
@@ -46,6 +57,7 @@ export function tokenGetter() {
     SplashScreen,
     AuthGuardService,
     AuthenticationService,
+    NotificationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

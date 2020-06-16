@@ -70,13 +70,4 @@ export class AddcompanyComponent implements OnInit {
   proceed(){
     console.log(this.companyForm.value);
   }
-
-  async alertNotification(title: string, msg: string) {
-    let alert = await this.alertCtrl.create({
-     header: title,
-     message: msg,
-     buttons:['Done']
-    });
-    alert.present();
-  }
 }
