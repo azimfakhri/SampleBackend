@@ -15,7 +15,6 @@ export class AddcompanyComponent implements OnInit {
   uploadedFilePath: string = null;
   constructor(
     private modalCtrl:ModalController,
-    private alertCtrl: AlertController,
     public builder : FormBuilder,
     public navParams: NavParams
   ) { }

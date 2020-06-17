@@ -22,6 +22,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { AddcompanyComponent } from './modal/addcompany/addcompany.component';
 import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
 import { NotificationService } from './services/notification.service';
+import { AddequipmentComponent } from './modal/addequipment/addequipment.component';
 
 
 export function tokenGetter() {
@@ -32,12 +33,14 @@ export function tokenGetter() {
     AppComponent,
     AdditionaldriverComponent,
     AddcompanyComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    AddequipmentComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
     AddcompanyComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    AddequipmentComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,

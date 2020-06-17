@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { AddcompanyComponent } from '../modal/addcompany/addcompany.component';
 import { ResetpasswordComponent } from '../modal/resetpassword/resetpassword.component';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-companies',
@@ -11,7 +12,8 @@ import { ResetpasswordComponent } from '../modal/resetpassword/resetpassword.com
 export class CompaniesPage implements OnInit {
   companies:any = []
   constructor(
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    private navCtrl : NavController,
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,26 @@ export class CompaniesPage implements OnInit {
       {companyId:'2e649e62f9924cb8825062e679f0a600',name:'Test1',logo:''},
       {companyId:'2e649e62f9924cb8825062e679f0a601',name:'Test2',logo:''}
     ]
+  }
+
+  ListEquipment(com){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl:true,
+      state: {
+        company:com
+      }
+    }
+    this.navCtrl.navigateForward('/equipment',navigationExtras);
+  }
+
+  ListUser(com){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl:true,
+      state: {
+        company:com
+      }
+    }
+    this.navCtrl.navigateForward('/users',navigationExtras);
   }
 
   async AddCompany(){
@@ -43,23 +65,6 @@ export class CompaniesPage implements OnInit {
     return await modal.present();
   }
 
-  async ResetPassword(com){
-    const modal = await this.modalCtrl.create({
-      component: ResetpasswordComponent,
-      backdropDismiss:false,
-      cssClass:'auto-height',
-      componentProps:{
-       com:com
-     }
-    });
-    modal.onDidDismiss()
-    .then((res) => {
-      //console.log(res);
-      if(res.data){
-       
-      } 
-    });
-    return await modal.present();
-  }
+  
 
 }

@@ -16,4 +16,23 @@ export class NotificationService {
     });
     alert.present();
   }
+
+  async DeleteConfirmation(title:string,msg:string){
+    let confirmation = await this.alertCtrl.create({
+      header: title,
+      message: msg,
+      buttons:[
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          
+        },
+        {
+          text: 'Delete',
+          role: 'delete'
+        }
+      ]
+     });
+     return confirmation;
+  }
 }
