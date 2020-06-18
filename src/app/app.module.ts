@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -23,10 +23,12 @@ import { AddcompanyComponent } from './modal/addcompany/addcompany.component';
 import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
 import { NotificationService } from './services/notification.service';
 import { AddequipmentComponent } from './modal/addequipment/addequipment.component';
+import { AdduserComponent } from './modal/adduser/adduser.component';
+import { AuthInterceptor } from './services/interceptor';
 
 
 export function tokenGetter() {
-  return sessionStorage.getItem("user_token");
+  return sessionStorage.getItem("token");
 }
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ export function tokenGetter() {
     AdditionaldriverComponent,
     AddcompanyComponent,
     ResetpasswordComponent,
-    AddequipmentComponent
+    AddequipmentComponent,
+    AdduserComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
     AddcompanyComponent,
     ResetpasswordComponent,
-    AddequipmentComponent
+    AddequipmentComponent,
+    AdduserComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,
@@ -61,7 +65,12 @@ export function tokenGetter() {
     AuthGuardService,
     AuthenticationService,
     NotificationService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

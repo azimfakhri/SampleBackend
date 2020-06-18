@@ -11,38 +11,14 @@
 <div class="inner-content">
   <div class="form-padding">
     <form [formGroup]="companyForm">
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size="6">
-            <div>Company Name</div>
-            <ion-input formControlName="companyName" class="input-style ion-text-uppercase"></ion-input>
-          </ion-col>
-          <ion-col>
-            <div>User Full Name</div>
-            <ion-input formControlName="userFullName" class="input-style ion-text-uppercase"></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6">
-            <div>Username</div>
-            <ion-input formControlName="userFullName" class="input-style ion-text-uppercase"></ion-input>
-          </ion-col>
-          <ion-col size="6">
-            <div>Password</div>
-            <ion-input formControlName="password" class="input-style ion-text-uppercase"></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6">
-            <div>Company Logo</div>
+      <div>Company Name</div>
+      <ion-input formControlName="companyName" class="input-style ion-text-uppercase"></ion-input>
+
+      <div>Company Logo</div>
             <input type="file" name="image"  formControlName="logo" (change)="fileProgress($event)" />
             <div class="image-preview" *ngIf="previewUrl">
               <img [src]="previewUrl" height="150" />                 
             </div>
-            
-          </ion-col>
-        </ion-row>
-      </ion-grid>
     </form>
   </div>
 </div>

@@ -51,10 +51,7 @@ export class UsersPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      //console.log(res);
-      if(res.data){
-       
-      } 
+      console.log(res);
     });
     return await modal.present();
   }
@@ -70,10 +67,7 @@ export class UsersPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      //console.log(res);
-      if(res.data){
-       
-      } 
+      console.log(res);
     });
     return await modal.present();
   }

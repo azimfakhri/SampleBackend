@@ -10,7 +10,19 @@
 </ion-header>
 <div class="inner-content">
   <div class="form-padding">
-    <div>Serial Number</div>
+    <form [formGroup]="userForm">
+      <div>User Full Name</div>
+      <ion-input formControlName="userFullName" class="input-style ion-text-uppercase"></ion-input>
+
+      <div>Username</div>
+      <ion-input formControlName="username" class="input-style ion-text-uppercase"></ion-input>
+
+      <div>Password</div>
+      <ion-input formControlName="password" class="input-style ion-text-uppercase"></ion-input>
+
+      <div>Confirm Password</div>
+      <ion-input formControlName="confirmpassword" class="input-style ion-text-uppercase"></ion-input>
+    </form>
   </div>
 </div>
 <ion-footer>

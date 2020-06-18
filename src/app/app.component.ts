@@ -83,17 +83,13 @@ export class AppComponent {
   }
 
   CheckLoggedIn(){
-   // return this.authservice.isAuthenticated();
-  return true;
+    return this.authservice.isAuthenticated();
   }
 
   getLoginID(){
-    // if(this.CheckLoggedIn()){
-    //   const token = sessionStorage.getItem('user_token');
-    //   return JSON.parse(this.jwtHelper.decodeToken(token).data).AccLoginID;
-    // }
-
-    return 'username01'
+    if(this.CheckLoggedIn()){
+      return sessionStorage.getItem('userFullName');
+    }
   }
 
   logout(){

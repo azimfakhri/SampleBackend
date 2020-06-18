@@ -30,16 +30,7 @@ export class AddcompanyComponent implements OnInit {
       ],
       'logo':[
         '',[Validators.required]
-      ],
-      'userFullName':[
-        '',[Validators.required]
-      ],
-      'username':[
-        '',[Validators.required]
-      ],
-      'password':[
-        '',[Validators.required]
-      ],
+      ]
     })
   }
 
