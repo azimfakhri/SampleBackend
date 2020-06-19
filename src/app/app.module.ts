@@ -26,6 +26,7 @@ import { AddequipmentComponent } from './modal/addequipment/addequipment.compone
 import { AdduserComponent } from './modal/adduser/adduser.component';
 import { AuthInterceptor } from './services/interceptor';
 import { AdminService } from './services/admin.service';
+import { ImageService } from './services/image.service';
 
 
 export function tokenGetter() {
@@ -67,6 +68,7 @@ export function tokenGetter() {
     AuthenticationService,
     NotificationService,
     AdminService,
+    ImageService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

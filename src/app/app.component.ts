@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController, AlertController, ModalController } from '@ionic/angular';
+import { Platform, NavController, AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -34,7 +34,10 @@ export class AppComponent {
     public idle: Idle,
     public keepalive: Keepalive,
     private notification:NotificationService,
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    
+    public alertctrl: AlertController,
+    public loading: LoadingController
   ) {
     this.initializeApp();
 
@@ -43,6 +46,9 @@ export class AppComponent {
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
     
     idle.onIdleStart.subscribe(() => { 
+      this.modalCtrl.dismiss();
+      this.alertctrl.dismiss();
+      this.loading.dismiss()
       this.idleState = 'You\'ve gone idle!';
       notification.alertNotification(this.idleState,'You will be auto log out after 30 Seconds if there is inactivity.');
     });
