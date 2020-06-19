@@ -11,6 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class SidenavComponent implements OnInit {
   appitems:any;
+  appItemsClient:any;
+  menu:any;
   constructor(
     private router: Router,
     private matIconRegistry: MatIconRegistry,
@@ -54,14 +56,36 @@ export class SidenavComponent implements OnInit {
         ]
       }
     ];
+
+    this.appItemsClient = [
+      {
+        label: 'Home',
+        icon: 'home',
+        link: 'home'
+      },
+      {
+        label: 'Employee',
+        icon: 'people',
+        items: [
+          {
+            label: 'List Employee',
+            link: 'employee',
+            icon: 'person_search'
+          },
+          
+        ]
+      },
+    ];
+
+    if(sessionStorage.getItem('usertype') == "1"){
+      this.menu = this.appitems;
+    }else{
+      this.menu = this.appItemsClient;
+    }
   }
 
-  navigateURL(url){
-    this.router.navigateByUrl('/'+ url, { replaceUrl: true });
-  }
 
   selectedItem(event){
-    console.log(event);
   }
 
   
