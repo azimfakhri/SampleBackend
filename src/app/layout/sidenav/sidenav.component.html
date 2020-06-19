@@ -1,9 +1,9 @@
-<div class="pane-margin">
+<!-- <div class="pane-margin">
   <ion-list lines="none">
-    <!-- <ion-item>
+    <ion-item>
       <mat-icon slot="start">dashboard</mat-icon>
       <span>Dashboard</span>
-    </ion-item> -->
+    </ion-item>
     <ion-item (click)="navigateURL('employee')" id="insuranceenquiry">
       <mat-icon svgIcon="form" slot="start"></mat-icon>
       <span>Employee</span>
@@ -14,4 +14,9 @@
     </ion-item>
     
   </ion-list>
+</div> -->
+<div class="pane-margin">
+  <ng-material-multilevel-menu [items]='appitems' (selectedItem)="selectedItem($event)">
+  </ng-material-multilevel-menu>
 </div>
+

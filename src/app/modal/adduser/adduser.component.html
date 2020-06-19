@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="modalHeader">
     <ion-title>
-      Company
+      User
     </ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="close()">X</ion-button>
@@ -10,15 +10,18 @@
 </ion-header>
 <div class="inner-content">
   <div class="form-padding">
-    <form [formGroup]="companyForm">
-      <div>Company Name</div>
-      <ion-input formControlName="companyName" class="input-style"></ion-input>
+    <form [formGroup]="userForm">
+      <div>User Full Name</div>
+      <ion-input formControlName="userFullName" class="input-style"></ion-input>
 
-      <div>Company Logo</div>
-            <input type="file" name="image"  formControlName="logo" (change)="fileProgress($event)" />
-            <div class="image-preview" *ngIf="previewUrl">
-              <img [src]="previewUrl" height="150" />                 
-            </div>
+      <div>Username</div>
+      <ion-input formControlName="username" class="input-style"></ion-input>
+
+      <div>Password</div>
+      <ion-input formControlName="password" class="input-style"></ion-input>
+
+      <div>Confirm Password</div>
+      <ion-input formControlName="confirmpassword" class="input-style"></ion-input>
     </form>
   </div>
 </div>

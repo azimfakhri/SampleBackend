@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController, AlertController } from '@ionic/angular';
+import { Platform, NavController, AlertController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
+import { NotificationService } from './services/notification.service';
+import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +33,8 @@ export class AppComponent {
     private navctrl: NavController,
     public idle: Idle,
     public keepalive: Keepalive,
-    private alertCtrl:AlertController
+    private notification:NotificationService,
+    private modalCtrl:ModalController
   ) {
     this.initializeApp();
 
@@ -41,7 +44,7 @@ export class AppComponent {
     
     idle.onIdleStart.subscribe(() => { 
       this.idleState = 'You\'ve gone idle!';
-      this.alertNotification(this.idleState,'You will be auto log out after 30 Seconds if there is inactivity.');
+      notification.alertNotification(this.idleState,'You will be auto log out after 30 Seconds if there is inactivity.');
     });
 
     idle.onIdleEnd.subscribe(() => {
@@ -54,7 +57,7 @@ export class AppComponent {
       
     });
 
-    keepalive.interval(15);
+    keepalive.interval(10);
 
     keepalive.onPing.subscribe(() => {
       this.lastPing = new Date();
@@ -82,33 +85,26 @@ export class AppComponent {
   }
 
   CheckLoggedIn(){
-   // return this.authservice.isAuthenticated();
-  return true;
+    return this.authservice.isAuthenticated();
   }
 
   getLoginID(){
-    // if(this.CheckLoggedIn()){
-    //   const token = sessionStorage.getItem('user_token');
-    //   return JSON.parse(this.jwtHelper.decodeToken(token).data).AccLoginID;
-    // }
-
-    return 'username01'
+    if(this.CheckLoggedIn()){
+      return sessionStorage.getItem('userFullName');
+    }
   }
 
   logout(){
     this.authservice.logout();
   }
 
-  profile(){
-    this.navctrl.navigateRoot('/userprofile',{replaceUrl:true});
+  async ChangePassword(){
+    const modal = await this.modalCtrl.create({
+      component: ResetpasswordComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height'
+    });
+    return await modal.present();
   }
 
-  async alertNotification(title: string, msg: string) {
-    let alert = await this.alertCtrl.create({
-     header: title,
-     message: msg,
-     buttons:['Done']
-    });
-    alert.present();
-  }
 }

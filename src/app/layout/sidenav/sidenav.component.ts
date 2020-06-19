@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-
+  appitems:any;
   constructor(
     private router: Router,
     private matIconRegistry: MatIconRegistry,
@@ -23,10 +23,46 @@ export class SidenavComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/form.svg')
     );
 
-    //console.log(location);
+    this.appitems = [
+      {
+        label: 'Home',
+        icon: 'home',
+        link: 'home'
+      },
+      // {
+      //   label: 'Employee',
+      //   icon: 'people',
+      //   items: [
+      //     {
+      //       label: 'List Employee',
+      //       link: 'employee',
+      //       icon: 'person_search'
+      //     },
+          
+      //   ]
+      // },
+      {
+        label: 'Companies',
+        icon: 'business',
+        items: [
+          {
+            label: 'List Companies',
+            link: 'companies',
+            icon: 'domain_disabled'
+          },
+          
+        ]
+      }
+    ];
   }
 
   navigateURL(url){
     this.router.navigateByUrl('/'+ url, { replaceUrl: true });
   }
+
+  selectedItem(event){
+    console.log(event);
+  }
+
+  
 }

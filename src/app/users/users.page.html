@@ -1,0 +1,31 @@
+<ion-content class="padding-content">
+  <h4>List Users</h4>
+  
+  <div class="divider-padding">
+    <mat-divider></mat-divider>
+  </div>
+
+  <div>
+    <button mat-flat-button color="warn" class="btn-margin-right" (click)="navigateBack()" aria-label="back">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+    <button mat-flat-button color="primary" class="btn-margin-right" (click)="AddUser()" aria-label="add equipment">
+      <mat-icon>add_circle_outline</mat-icon> Add User
+    </button>
+  </div>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let user of userlist">
+      <mat-divider></mat-divider>
+      <div mat-line>Full Name: {{user.fullName}}</div>
+      <div mat-line>Username: {{user.username}}</div>
+      <button mat-icon-button color="warning" (click)="ResetPassword(user)" aria-label="Reset password">
+        <mat-icon>security</mat-icon>
+      </button>
+      <button mat-icon-button (click)="DeleteUser(user)" aria-label="delete equipment">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+    </mat-list-item>
+  </mat-list>
+</ion-content>

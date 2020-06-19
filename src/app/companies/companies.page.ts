@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController, LoadingController } from '@ionic/angular';
 import { AddcompanyComponent } from '../modal/addcompany/addcompany.component';
+import { ResetpasswordComponent } from '../modal/resetpassword/resetpassword.component';
+import { NavigationExtras } from '@angular/router';
+import { AdminService } from '../services/admin.service';
+import { NotificationService } from '../services/notification.service';
+
 
 @Component({
   selector: 'app-companies',
@@ -8,22 +13,54 @@ import { AddcompanyComponent } from '../modal/addcompany/addcompany.component';
   styleUrls: ['./companies.page.scss'],
 })
 export class CompaniesPage implements OnInit {
-  companies:any = []
+  companieslist:any = []
   constructor(
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    private navCtrl : NavController,
+    private adminservice: AdminService,
+    private notification:NotificationService,
+    public loading: LoadingController,
   ) { }
 
   ngOnInit() {
-    this.GetCompanies();
+    this.getCompany();
     
   }
 
-  GetCompanies(){
+  async getCompany(){
+    let loader = await this.loading.create({
+      message:'Please wait.'
+    });
     
-    this.companies = [
-      {companyId:'2e649e62f9924cb8825062e679f0a600',name:'Test1',logo:''},
-      {companyId:'2e649e62f9924cb8825062e679f0a601',name:'Test2',logo:''}
-    ]
+    loader.present();
+
+    const res = await this.adminservice.GetCompanyList();
+    if(res['code'] == "0"){
+      this.companieslist =  res['data'];
+    }else{
+      this.notification.errorNotification(res['code'],res['msg']);
+    }
+    loader.dismiss();
+  }
+
+  ListEquipment(com){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl:true,
+      state: {
+        company:com
+      }
+    }
+    this.navCtrl.navigateForward('/equipment',navigationExtras);
+  }
+
+  ListUser(com){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl:true,
+      state: {
+        company:com
+      }
+    }
+    this.navCtrl.navigateForward('/users',navigationExtras);
   }
 
   async AddCompany(){
@@ -34,12 +71,11 @@ export class CompaniesPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      //console.log(res);
-      if(res.data){
-       
-      } 
+      this.getCompany();
     });
     return await modal.present();
   }
+
+  
 
 }

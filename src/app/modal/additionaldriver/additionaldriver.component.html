@@ -17,7 +17,7 @@
             <ion-row>
               <ion-col>
                 <div>Name as per NRIC</div>
-                <ion-input formControlName="name" class="input-style ion-text-uppercase"></ion-input>
+                <ion-input formControlName="name" class="input-style"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -33,7 +33,7 @@
             <ion-row>
               <ion-col>
                 <div>ID Number</div>
-              <ion-input (keyup)="addDash()" placeholder="880808145123" class="input-style ion-text-uppercase" formControlName="idNo" [maxlength]="iclength"></ion-input>
+              <ion-input (keyup)="addDash()" placeholder="880808145123" class="input-style" formControlName="idNo" [maxlength]="iclength"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -111,8 +111,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button *ngIf="isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Add</button>
-          <button *ngIf="!isAdd" mat-button class="proceed-btn-form" type="button" (click)="proceed()">Save</button>
+          <ion-button *ngIf="isAdd" class="proceed-btn-form" type="button" (click)="proceed()">Add</ion-button>
+          <ion-button *ngIf="!isAdd" class="proceed-btn-form" type="button" (click)="proceed()">Save</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

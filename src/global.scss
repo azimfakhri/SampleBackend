@@ -192,7 +192,7 @@ ion-modal.auto-height {
     &.bottom {
         align-items: flex-end;
     }
-    --width:1000px;
+    --width:600px;
     --height: auto;
 
     .ion-page {
@@ -220,3 +220,12 @@ ion-modal.auto-height {
   .image-preview{
       padding:20px 0;
   }
+
+  .btn-margin-right{
+      margin: 0 10px 0 0 !important;
+  }
+
+  .modalHeader{
+    --background: #004CFF;
+    --color: #FFFFFF;
+}

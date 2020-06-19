@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
       this.username = '';
       this.password = '';
       if(this.authservice.isAuthenticated()){
-        this.navCtrl.navigateRoot('/getquote');
+        this.navCtrl.navigateRoot('/home');
       }
     }
 
@@ -32,18 +32,16 @@ export class LoginPage implements OnInit {
 
   async login(){
     let logindata = {
-      email: this.username,
+      username: this.username,
       password: this.password
     }
 
-    // var encryptdata = CryptoJS.AES.encrypt(JSON.stringify(logindata), '');
-    
-    // const res = await this.authservice.login(encryptdata);
-    // if(res == false){
-    //   this.iserror = true;
-    // }else{
-    //   this.iserror = false;
-    // }
+    const res = await this.authservice.login(logindata);
+    if(res == false){
+      this.iserror = true;
+    }else{
+      this.iserror = false;
+    }
   }
 
   resetpassword(){
