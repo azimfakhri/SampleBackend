@@ -7,7 +7,10 @@ export let message ={
         "DelEquipmentMsg":"Are you sure want to delete this equipment?",
         "DelUserTitle":"Delete User",
         "DelUserMsg":"Are you sure want to delete this user?",
-        
+        "Success":"Success",
+        "SuccessMsg":"Record successfully added",
+        "SuccessMsgDelete":"Record successfully deleted",
+        "SuccessMsgPassword":"Password changed",
     },
     error:{
         "title": "Error",

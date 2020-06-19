@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
       this.username = '';
       this.password = '';
       if(this.authservice.isAuthenticated()){
-        this.navCtrl.navigateRoot('/getquote');
+        this.navCtrl.navigateRoot('/home');
       }
     }
 

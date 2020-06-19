@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController,NavParams, AlertController } from '@ionic/angular';
+import { ModalController,NavParams, AlertController, LoadingController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/services/admin.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import * as config from '../../config'
 
 @Component({
   selector: 'app-addcompany',
@@ -16,7 +19,10 @@ export class AddcompanyComponent implements OnInit {
   constructor(
     private modalCtrl:ModalController,
     public builder : FormBuilder,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private adminservice:AdminService,
+    private notification:NotificationService,
+    public loading : LoadingController,
   ) { }
 
   ngOnInit() {
@@ -57,7 +63,27 @@ export class AddcompanyComponent implements OnInit {
     }
   }
 
-  proceed(){
-    console.log(this.companyForm.value);
+  async proceed(){
+    if(this.companyForm.valid){
+      let loader = await this.loading.create({
+        message:'Please wait.'
+      });
+      
+      loader.present();
+      var form = this.companyForm.value;
+      const formData = new FormData();
+      formData.append('companyName', form.companyName);
+      formData.append('logo', this.fileData);
+      const res = await this.adminservice.AddNewCompany(formData);
+
+      if(res['code'] == "0"){
+       this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
+       this.modalCtrl.dismiss();
+      }else{
+        this.notification.errorNotification(res['code'],res['msg']);
+      }
+      loader.dismiss();
+    }
+    
   }
 }

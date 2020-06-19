@@ -5,7 +5,8 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: 'dashboard',
@@ -18,19 +19,23 @@ const routes: Routes = [
   },
   {
     path: 'employee',
-    loadChildren: () => import('./employee/employee.module').then( m => m.EmployeePageModule)
+    loadChildren: () => import('./employee/employee.module').then( m => m.EmployeePageModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: 'companies',
-    loadChildren: () => import('./companies/companies.module').then( m => m.CompaniesPageModule)
+    loadChildren: () => import('./companies/companies.module').then( m => m.CompaniesPageModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: 'equipment',
-    loadChildren: () => import('./equipment/equipment.module').then( m => m.EquipmentPageModule)
+    loadChildren: () => import('./equipment/equipment.module').then( m => m.EquipmentPageModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: 'users',
-    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
+    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
+    canActivate:[AuthGuardService]
   },
 ];
 

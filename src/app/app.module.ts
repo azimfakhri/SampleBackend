@@ -25,6 +25,7 @@ import { NotificationService } from './services/notification.service';
 import { AddequipmentComponent } from './modal/addequipment/addequipment.component';
 import { AdduserComponent } from './modal/adduser/adduser.component';
 import { AuthInterceptor } from './services/interceptor';
+import { AdminService } from './services/admin.service';
 
 
 export function tokenGetter() {
@@ -65,6 +66,7 @@ export function tokenGetter() {
     AuthGuardService,
     AuthenticationService,
     NotificationService,
+    AdminService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, LoadingController } from '@ionic/angular';
 import { AddequipmentComponent } from '../modal/addequipment/addequipment.component';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import * as config from "../config"
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-equipment',
@@ -18,14 +19,17 @@ export class EquipmentPage implements OnInit {
     private navCtrl : NavController,
     private route : ActivatedRoute,
     private router : Router,
-    private notification: NotificationService
+    private notification: NotificationService,
+    public loading : LoadingController,
+    private adminservice: AdminService
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params =>{
       if(this.router.getCurrentNavigation().extras.state){
         this.company = this.router.getCurrentNavigation().extras.state.company;
-        console.log(this.company);
+        
+        this.GetEquipment();
       }else{
         let navigationExtras: NavigationExtras = {
           replaceUrl:true,
@@ -33,13 +37,23 @@ export class EquipmentPage implements OnInit {
         this.navCtrl.navigateBack('/companies',navigationExtras);
       }
     });
-    this.GetEquipment();
+  
   }
 
-  GetEquipment(){
-    this.equipmentList = [
-      {sn:'tesadko213',equipmentId:'asdandjaj2'}
-    ]
+  async GetEquipment(){
+    let loader = await this.loading.create({
+      message:'Please wait.'
+    });
+    
+    loader.present();
+
+    const res = await this.adminservice.GetEquipmentList(this.company.companyId);
+    if(res['code'] == "0"){
+      this.equipmentList =  res['data'];
+    }else{
+      this.notification.errorNotification(res['code'],res['msg']);
+    }
+    loader.dismiss();
   }
 
   async DeleteEquipment(eq){
@@ -47,9 +61,15 @@ export class EquipmentPage implements OnInit {
     res.present();
 
     res.onDidDismiss()
-    .then((val) => {
+    .then(async (val) => {
       if(val.role == "delete"){
-        //code for deletion
+        const res = await this.adminservice.DeleteEquipment(eq.equipmentId);
+        if(res['code'] == "0"){
+          this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
+          this.GetEquipment();
+        }else{
+           this.notification.errorNotification(res['code'],res['msg']);
+        }
       }
     });
   }
@@ -59,13 +79,13 @@ export class EquipmentPage implements OnInit {
       component: AddequipmentComponent,
       backdropDismiss:false,
       cssClass:'auto-height',
+      componentProps: {
+        company:this.company
+     }
     });
     modal.onDidDismiss()
     .then((res) => {
-      //console.log(res);
-      if(res.data){
-       
-      } 
+      this.GetEquipment();
     });
     return await modal.present();
   }

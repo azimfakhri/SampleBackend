@@ -48,25 +48,24 @@ export class AuthenticationService {
     
   // }
 
-  // resetpassword(encrypteddata: any){
-  //   const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-  //   this.http.post(this.URL_Auth + 'user/resetpassword/',{data: encodeURIComponent(encrypteddata.toString())}, { headers, responseType: 'json'})
-  //   .subscribe(res =>{
-  //     //console.log(res);
-  //   })
-  // }
+  async resetpassword(data: any){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const res = await this.http.post(this.URL_API + '/account/changePassword',JSON.stringify(data), { headers, responseType: 'json'}).toPromise()
+    .catch(err => { console.log(err);
+   });
+
+    return res;
+  }
 
   async login(data: any) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-
-     const res = await this.http.post(this.URL_API + 'v1/account/login',JSON.stringify(data), { headers, responseType: 'json'}).toPromise()
+    const res = await this.http.post(this.URL_API + '/account/login',JSON.stringify(data), { headers, responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 
     if(res['code'] == "0"){
       
-      sessionStorage.setItem('token', res['data'][0].token);
+      sessionStorage.setItem('user-token', res['data'][0].token);
       sessionStorage.setItem('userFullName', res['data'][0].userFullName);
       sessionStorage.setItem('type', res['data'][0].type);
       sessionStorage.setItem('companyId', res['data'][0].company.id);
@@ -91,13 +90,21 @@ export class AuthenticationService {
   }
  
   isAuthenticated() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('user-token');
+    if(token){
+      //return !this.jwtHelper.isTokenExpired(token);
 
-    if(!this.jwtHelper.isTokenExpired(token)){
-      return true;
+      if(this.jwtHelper.isTokenExpired(token)){
+        //const res = this.refreshToken();
+
+        return false
+      }else{
+        return true
+      }
     }else{
-
+      return false;
     }
+    
     
   }
   
@@ -106,9 +113,16 @@ export class AuthenticationService {
   }
 
   async refreshToken(){
-    const res = await this.http.get(this.URL_API + 'v1/account/refreshToken', { responseType: 'json'}).toPromise()
+    const res = await this.http.get(this.URL_API + '/account/refreshToken', { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
+
+    if(res['code'] == "0"){
+      sessionStorage.setItem('user-token', res['data'][0].newToken);  
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

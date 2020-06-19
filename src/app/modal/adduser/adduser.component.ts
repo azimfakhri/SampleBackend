@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, LoadingController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/services/notification.service';
 import * as config from '../../config';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-adduser',
@@ -11,15 +12,19 @@ import * as config from '../../config';
 })
 export class AdduserComponent implements OnInit {
   userForm:any;
+  company:any;
   constructor(
     private modalCtrl:ModalController,
     public builder : FormBuilder,
     public navParams: NavParams,
-    private notification: NotificationService
+    private adminservice:AdminService,
+    private notification:NotificationService,
+    public loading : LoadingController,
   ) { }
 
   ngOnInit() {
     this.SetForm();
+    this.company = this.navParams.get('company');
   }
 
   SetForm(){
@@ -39,24 +44,32 @@ export class AdduserComponent implements OnInit {
     })
   }
 
-  proceed(){
+  async proceed(){
     if(this.userForm.valid){
+      let loader = await this.loading.create({
+        message:'Please wait.'
+      });
+      
+      loader.present();
+
       var form = this.userForm.value;
 
       if(form.password == form.confirmpassword){
         console.log(this.userForm.value);
 
         //API Code
-        var res = true;
-        if(res){
+        const res = await this.adminservice.AddNewUser(this.company.companyId,this.userForm.value);
+        if(res['code'] == "0"){
+          this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
           this.modalCtrl.dismiss();
-        }else{
-          
-        }
+         }else{
+           this.notification.errorNotification(res['code'],res['msg']);
+         }
         
       }else{
         this.notification.alertNotification(config.message.alert.Warning,config.message.alert.PasswordNotMatch);
       }
+      loader.dismiss();
     }
     
     
