@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { ToastController, Platform, NavController } from '@ionic/angular';
+import { ToastController, Platform, NavController, LoadingController, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpHeaders,HttpClient } from '@angular/common/http';
 import {environment} from 'src/environments/environment'
