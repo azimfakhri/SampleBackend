@@ -22,7 +22,6 @@ export class AddequipmentComponent implements OnInit {
 
   ngOnInit() {
     this.company = this.navParams.get('company');
-    console.log(this.company);
   }
 
   async proceed(){

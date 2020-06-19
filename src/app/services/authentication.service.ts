@@ -67,7 +67,7 @@ export class AuthenticationService {
       
       sessionStorage.setItem('user-token', res['data'][0].token);
       sessionStorage.setItem('userFullName', res['data'][0].userFullName);
-      sessionStorage.setItem('type', res['data'][0].type);
+      sessionStorage.setItem('usertype', res['data'][0].type);
       sessionStorage.setItem('companyId', res['data'][0].company.id);
       sessionStorage.setItem('companyName', res['data'][0].company.name);
       sessionStorage.setItem('companyLogo', res['data'][0].company.logo);

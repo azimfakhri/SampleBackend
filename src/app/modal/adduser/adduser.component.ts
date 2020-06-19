@@ -55,7 +55,6 @@ export class AdduserComponent implements OnInit {
       var form = this.userForm.value;
 
       if(form.password == form.confirmpassword){
-        console.log(this.userForm.value);
 
         //API Code
         const res = await this.adminservice.AddNewUser(this.company.companyId,this.userForm.value);
