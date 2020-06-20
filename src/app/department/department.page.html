@@ -12,7 +12,7 @@
     <mat-list-item *ngFor="let com of departmentList">
       <mat-divider></mat-divider>
       <div mat-line>{{com.departmentName}}</div>
-      <button mat-icon-button (click)="DeleteDepartment(com)" aria-label="Delete Department">
+      <button mat-icon-button (click)="UpdateDepartment(com)" aria-label="Delete Department">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button (click)="DeleteDepartment(com)" aria-label="Delete Department">

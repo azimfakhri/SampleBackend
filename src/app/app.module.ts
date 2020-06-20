@@ -29,6 +29,7 @@ import { AdminService } from './services/admin.service';
 import { ImageService } from './services/image.service';
 import { ClientService } from './services/client.service';
 import { AdddepartmentComponent } from './modal/adddepartment/adddepartment.component';
+import { EditdepartmentComponent } from './modal/editdepartment/editdepartment.component';
 
 
 export function tokenGetter() {
@@ -42,7 +43,8 @@ export function tokenGetter() {
     ResetpasswordComponent,
     AddequipmentComponent,
     AdduserComponent,
-    AdddepartmentComponent
+    AdddepartmentComponent,
+    EditdepartmentComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
@@ -50,7 +52,8 @@ export function tokenGetter() {
     ResetpasswordComponent,
     AddequipmentComponent,
     AdduserComponent,
-    AdddepartmentComponent
+    AdddepartmentComponent,
+    EditdepartmentComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,
