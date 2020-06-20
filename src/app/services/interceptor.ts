@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.url.indexOf('refresh') !== -1) {
-            return next.handle(req);
+            return next.handle(this.injectRefresh(req));
         }
         if (req.url.indexOf('login') !== -1) {
             return next.handle(req);
@@ -51,6 +51,13 @@ export class AuthInterceptor implements HttpInterceptor {
                 Authorization: `Bearer ${token}`
 
             }
+        });
+    }
+
+    injectRefresh(request: HttpRequest<any>) {
+        const token = sessionStorage.getItem('user-token');
+        return request.clone({
+            withCredentials: true,
         });
     }
 }

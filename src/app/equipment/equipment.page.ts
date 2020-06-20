@@ -57,7 +57,7 @@ export class EquipmentPage implements OnInit {
   }
 
   async DeleteEquipment(eq){
-    var res = await this.notification.DeleteConfirmation(config.message.alert.DelEquipmentTitle,config.message.alert.DelEquipmentMsg);
+    var res = await this.notification.DeleteConfirmation(config.message.alert.DelTitle,config.message.alert.DelMsg);
     res.present();
 
     res.onDidDismiss()

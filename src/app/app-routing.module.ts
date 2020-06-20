@@ -37,6 +37,12 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
     canActivate:[AuthGuardService]
   },
+  {
+    path: 'department',
+    loadChildren: () => import('./department/department.module').then( m => m.DepartmentPageModule),
+    canActivate:[AuthGuardService]
+  },
+
 ];
 
 @NgModule({

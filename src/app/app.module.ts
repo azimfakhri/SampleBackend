@@ -27,6 +27,8 @@ import { AdduserComponent } from './modal/adduser/adduser.component';
 import { AuthInterceptor } from './services/interceptor';
 import { AdminService } from './services/admin.service';
 import { ImageService } from './services/image.service';
+import { ClientService } from './services/client.service';
+import { AdddepartmentComponent } from './modal/adddepartment/adddepartment.component';
 
 
 export function tokenGetter() {
@@ -39,14 +41,16 @@ export function tokenGetter() {
     AddcompanyComponent,
     ResetpasswordComponent,
     AddequipmentComponent,
-    AdduserComponent
+    AdduserComponent,
+    AdddepartmentComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
     AddcompanyComponent,
     ResetpasswordComponent,
     AddequipmentComponent,
-    AdduserComponent
+    AdduserComponent,
+    AdddepartmentComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,
@@ -69,6 +73,7 @@ export function tokenGetter() {
     NotificationService,
     AdminService,
     ImageService,
+    ClientService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

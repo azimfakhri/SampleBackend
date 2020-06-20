@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpHeaders,HttpClient } from '@angular/common/http';
 import {environment} from 'src/environments/environment'
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +24,15 @@ export class AuthenticationService {
     private http: HttpClient,
     public route: ActivatedRoute,
     public jwtHelper: JwtHelperService,
+    private notification: NotificationService
   ) { 
     this.platform.ready().then(() => {
       if (location && !this.disabledRedirectFor.find(path => {
         return location.pathname.includes(path)
       })){
-        if(!this.isAuthenticated()){
-          this.navCtrl.navigateRoot('/login');
-        }
+        // if(!this.isAuthenticated()){
+        //   this.logout();
+        // }
       }else{
         if(this.isAuthenticated()){
           this.navCtrl.navigateRoot('/home');
@@ -39,14 +41,6 @@ export class AuthenticationService {
       
     });
   }
-
-  // async changepassword(data){
-  //   const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-  //   const res = await this.http.post(this.URL_Auth + 'user/completeReset',JSON.stringify(data), { headers, responseType: 'json'}).toPromise();
-
-  //   return res;
-    
-  // }
 
   async resetpassword(data: any){
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -89,38 +83,59 @@ export class AuthenticationService {
     this.navCtrl.navigateRoot('/login');
   }
  
-  isAuthenticated() {
+  isAuthenticated() { 
     const token = sessionStorage.getItem('user-token');
     if(token){
-      //return !this.jwtHelper.isTokenExpired(token);
 
       if(this.jwtHelper.isTokenExpired(token)){
-        //const res = this.refreshToken();
-
-        return false
+        return false;
       }else{
-        return true
+        this.authState.next(true);
+        return true;
       }
     }else{
       return false;
     }
-    
-    
   }
+
+  isAuthenticatedv2() { //used for refresh dom after login
+    const token = sessionStorage.getItem('user-token');
+    if(token){
+
+      if(this.jwtHelper.isTokenExpired(token)){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return false;
+    }
+  }
+
+
+
   
   getUserLoggedIn(): Observable<boolean> {
     return this.authState.asObservable();
   }
 
   async refreshToken(){
+    console.log(sessionStorage.getItem('user-token'));
     const res = await this.http.get(this.URL_API + '/account/refreshToken', { responseType: 'json'}).toPromise()
-     .catch(err => { console.log(err);
+     .catch(err => { 
+       console.log(err);
+       this.logout();
+
+        return false;
     });
 
     if(res['code'] == "0"){
       sessionStorage.setItem('user-token', res['data'][0].newToken);  
+      this.authState.next(true);
       return true;
     }else{
+      this.logout();
+
       return false;
     }
   }
