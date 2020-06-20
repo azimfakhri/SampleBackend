@@ -3,14 +3,14 @@ export let message ={
         "Warning" : "Warning",
         "MandatoryField" : "Please fill in all mandatory field(s).",
         "PasswordNotMatch" : "Password not matched.",
-        "DelEquipmentTitle":"Delete Equipment",
-        "DelEquipmentMsg":"Are you sure want to delete this equipment?",
-        "DelUserTitle":"Delete User",
-        "DelUserMsg":"Are you sure want to delete this user?",
+        "DelTitle":"Delete",
+        "DelMsg":"Are you sure want to delete this record?",
         "Success":"Success",
         "SuccessMsg":"Record successfully added",
+        "SuccessMsgUpdate":"Record successfully updated",
         "SuccessMsgDelete":"Record successfully deleted",
         "SuccessMsgPassword":"Password changed",
+        
     },
     error:{
         "title": "Error",

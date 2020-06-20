@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { Platform, NavController, AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -18,7 +18,7 @@ import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.comp
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  isLoggedin:boolean;
+  isLoggedin:boolean = false;
   accloginid:string;
   idleState:string = 'Not started.';
   timedOut:boolean = false;
@@ -67,10 +67,21 @@ export class AppComponent {
 
     keepalive.onPing.subscribe(() => {
       this.lastPing = new Date();
+      console.log('interval 10')
+      if(this.CheckLoggedIn()){
+        console.log('interval:true')
+      }else{
+        console.log('interval:false')
+        const res = this.refreshToken();
+
+        console.log(res);
+      }
+      
     });
 
     this.authservice.getUserLoggedIn().subscribe(userLoggedIn => {
       if (userLoggedIn) {
+        this.CheckLoggedInv2();
         idle.watch()
         this.timedOut = false;
       } else {
@@ -88,16 +99,28 @@ export class AppComponent {
       this.splashScreen.hide();
     });
 
+    this.CheckLoggedIn();
   }
 
   CheckLoggedIn(){
-    return this.authservice.isAuthenticated();
+    this.isLoggedin = this.authservice.isAuthenticated()
+    return this.isLoggedin;
+  }
+
+  CheckLoggedInv2(){
+    this.isLoggedin = this.authservice.isAuthenticatedv2()
+    return this.isLoggedin;
   }
 
   getLoginID(){
     if(this.CheckLoggedIn()){
       return sessionStorage.getItem('userFullName');
     }
+  }
+
+  async refreshToken(){
+    const res = await this.authservice.refreshToken();
+    return res;
   }
 
   logout(){

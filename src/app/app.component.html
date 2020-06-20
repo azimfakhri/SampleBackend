@@ -1,7 +1,7 @@
 
   
 <ion-app>
-  <ion-header *ngIf="CheckLoggedIn()">
+  <ion-header *ngIf="isLoggedin">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-button color="primary" (click)="sideNav.toggle()"><ion-icon slot="icon-only" name="menu"></ion-icon></ion-button>
@@ -25,15 +25,15 @@
     </ion-toolbar>
   </ion-header>
   <mat-sidenav-container autosize>
-    <mat-sidenav #sideNav [opened]="CheckLoggedIn()" mode="side">
-      <app-sidenav *ngIf="CheckLoggedIn()"></app-sidenav>
+    <mat-sidenav #sideNav [opened]="isLoggedin" mode="side">
+      <app-sidenav *ngIf="isLoggedin"></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content style="margin-bottom: 700px;">
       <ion-router-outlet id="content1" class="pane-margin"></ion-router-outlet>
       
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <app-footer *ngIf="CheckLoggedIn()"></app-footer>
+  <app-footer *ngIf="isLoggedin"></app-footer>
 
 </ion-app>
 

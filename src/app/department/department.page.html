@@ -1,0 +1,26 @@
+<ion-content class="padding-content">
+  <h4>List Department</h4>
+  
+  <div class="divider-padding">
+    <mat-divider></mat-divider>
+  </div>
+
+  <button mat-flat-button color="primary" (click)="AddDepartment()" aria-label="add department">
+    <mat-icon>add_circle_outline</mat-icon> Add Department
+  </button>
+  <mat-list>
+    <mat-list-item *ngFor="let com of departmentList">
+      <mat-divider></mat-divider>
+      <div mat-line>{{com.departmentName}}</div>
+      <button mat-icon-button (click)="UpdateDepartment(com)" aria-label="Delete Department">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="DeleteDepartment(com)" aria-label="Delete Department">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="List Employee">
+        <mat-icon>people</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</ion-content>

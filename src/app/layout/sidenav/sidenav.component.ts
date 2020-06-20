@@ -31,29 +31,10 @@ export class SidenavComponent implements OnInit {
         icon: 'home',
         link: 'home'
       },
-      // {
-      //   label: 'Employee',
-      //   icon: 'people',
-      //   items: [
-      //     {
-      //       label: 'List Employee',
-      //       link: 'employee',
-      //       icon: 'person_search'
-      //     },
-          
-      //   ]
-      // },
       {
         label: 'Companies',
         icon: 'business',
-        items: [
-          {
-            label: 'List Companies',
-            link: 'companies',
-            icon: 'domain_disabled'
-          },
-          
-        ]
+        link: 'companies'
       }
     ];
 
@@ -62,6 +43,11 @@ export class SidenavComponent implements OnInit {
         label: 'Home',
         icon: 'home',
         link: 'home'
+      },
+      {
+        label: 'Department',
+        icon: 'business',
+        link: 'department'
       },
       {
         label: 'Employee',

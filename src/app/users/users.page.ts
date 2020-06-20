@@ -87,7 +87,7 @@ export class UsersPage implements OnInit {
   }
 
   async DeleteUser(user){
-    var res = await this.notification.DeleteConfirmation(config.message.alert.DelUserTitle,config.message.alert.DelUserMsg);
+    var res = await this.notification.DeleteConfirmation(config.message.alert.DelTitle,config.message.alert.DelMsg);
     res.present();
 
     res.onDidDismiss()
