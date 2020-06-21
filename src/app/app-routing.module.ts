@@ -38,11 +38,6 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
-    path: 'bindequipment',
-    loadChildren: () => import('./bindequipment/bindequipment.module').then( m => m.BindequipmentPageModule),
-    canActivate:[AuthGuardService]
-  },
-  {
     path: 'bindemployee',
     loadChildren: () => import('./bindemployee/bindemployee.module').then( m => m.BindemployeePageModule),
     canActivate:[AuthGuardService]

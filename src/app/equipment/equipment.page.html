@@ -6,10 +6,10 @@
   </div>
 
   <div class="divaddfilter">
-    <button mat-flat-button color="warn"  class="btn-margin-right addfilter" (click)="navigateBack()" aria-label="back">
+    <button mat-flat-button color="warn" *ngIf="usertype == 1"  class="btn-margin-right addfilter" (click)="navigateBack()" aria-label="back">
       <mat-icon>arrow_back</mat-icon> Back
     </button>
-    <button mat-flat-button color="primary" class="btn-margin-right addfilter" (click)="AddEquipment()" aria-label="add equipment">
+    <button mat-flat-button color="primary" *ngIf="usertype == 1" class="btn-margin-right addfilter" (click)="AddEquipment()" aria-label="add equipment">
       <mat-icon>add_circle_outline</mat-icon> Add Equipment
     </button>
 
@@ -24,7 +24,10 @@
     <mat-list-item *ngFor="let eq of filteredList">
       <mat-divider></mat-divider>
       <div mat-line>{{eq.sn}}</div>
-      <button mat-icon-button (click)="DeleteEquipment(eq)" aria-label="delete equipment">
+      <button *ngIf="usertype == 2" mat-icon-button (click)="ViewDepartment(eq)" aria-label="View Department">
+        <mat-icon>build</mat-icon>
+      </button>
+      <button *ngIf="usertype == 1" mat-icon-button (click)="DeleteEquipment(eq)" aria-label="delete equipment">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-list-item>

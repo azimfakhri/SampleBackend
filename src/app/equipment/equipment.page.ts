@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import * as config from "../config"
 import { AdminService } from '../services/admin.service';
+import { ClientService } from '../services/client.service';
+import { BindequipmentComponent } from '../modal/bindequipment/bindequipment.component';
 
 @Component({
   selector: 'app-equipment',
@@ -15,6 +17,7 @@ export class EquipmentPage implements OnInit {
   equipmentList:any = [];
   filteredList:any = [];
   company:any;
+  usertype:any;
   constructor(
     private modalCtrl:ModalController,
     private navCtrl : NavController,
@@ -22,22 +25,30 @@ export class EquipmentPage implements OnInit {
     private router : Router,
     private notification: NotificationService,
     public loading : LoadingController,
-    private adminservice: AdminService
+    private adminservice: AdminService,
+    private clientservice:ClientService
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params =>{
-      if(this.router.getCurrentNavigation().extras.state){
-        this.company = this.router.getCurrentNavigation().extras.state.company;
-        
-        this.GetEquipment();
-      }else{
-        let navigationExtras: NavigationExtras = {
-          replaceUrl:true,
+    this.usertype = sessionStorage.getItem('usertype');
+
+    if(this.usertype == 1){
+      this.route.queryParams.subscribe(params =>{
+        if(this.router.getCurrentNavigation().extras.state){
+          this.company = this.router.getCurrentNavigation().extras.state.company;
+          
+          this.GetEquipment();
+        }else{
+          let navigationExtras: NavigationExtras = {
+            replaceUrl:true,
+          }
+          this.navCtrl.navigateBack('/companies',navigationExtras);
         }
-        this.navCtrl.navigateBack('/companies',navigationExtras);
-      }
-    });
+      });
+    }else{
+      this.GetEquipment();
+    }
+    
   
   }
 
@@ -47,14 +58,24 @@ export class EquipmentPage implements OnInit {
     });
     
     loader.present();
-
-    const res = await this.adminservice.GetEquipmentList(this.company.companyId);
-    if(res['code'] == 0){
-      this.equipmentList =  res['data'];
-      this.filteredList = this.equipmentList;
+    if(this.usertype == 1){
+      const res = await this.adminservice.GetEquipmentList(this.company.companyId);
+      if(res['code'] == 0){
+        this.equipmentList =  res['data'];
+        this.filteredList = this.equipmentList;
+      }else{
+        this.notification.errorNotification(res['code'],res['msg']);
+      }
     }else{
-      this.notification.errorNotification(res['code'],res['msg']);
+      const res = await this.clientservice.getEquipments();
+      if(res['code'] == 0){
+        this.equipmentList =  res['data'];
+        this.filteredList = this.equipmentList;
+      }else{
+        this.notification.errorNotification(res['code'],res['msg']);
+      }
     }
+    
     loader.dismiss();
   }
 
@@ -83,6 +104,22 @@ export class EquipmentPage implements OnInit {
       cssClass:'auto-height',
       componentProps: {
         company:this.company
+     }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      this.GetEquipment();
+    });
+    return await modal.present();
+  }
+
+  async ViewDepartment(eq){
+    const modal = await this.modalCtrl.create({
+      component: BindequipmentComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps: {
+        equipment:eq
      }
     });
     modal.onDidDismiss()

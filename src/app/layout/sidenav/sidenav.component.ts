@@ -55,7 +55,7 @@ export class SidenavComponent implements OnInit {
           },
           {
             label: 'Manage Equipment',
-            link: '/bindequipment',
+            link: 'equipment',
             icon: 'swap_horiz'
           }
         ]
