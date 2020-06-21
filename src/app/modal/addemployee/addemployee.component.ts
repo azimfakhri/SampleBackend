@@ -49,10 +49,10 @@ export class AddemployeeComponent implements OnInit {
         '',[Validators.required]
       ],
       'nric':[
-        '',[Validators.required]
+        ''
       ],
       'empNo':[
-        '',[Validators.required]
+        ''
       ],
       'address':[
         ''
@@ -112,7 +112,6 @@ export class AddemployeeComponent implements OnInit {
       var form = this.employeeForm.value;
 
       const formData = new FormData();
-      formData.append('departmentId', form.departmentId);
       formData.append('name', form.name);
       formData.append('phone', form.phone);
       formData.append('sex', form.sex);
@@ -123,7 +122,7 @@ export class AddemployeeComponent implements OnInit {
         formData.append('img', this.fileData);
       }
       
-      const res = await this.clientservice.addEmployee(formData);
+      const res = await this.clientservice.addEmployeeByDepartment(form.departmentId,formData);
 
       if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);

@@ -42,6 +42,22 @@ export class AuthenticationService {
     });
   }
 
+  async GetProfile(){
+    const res = await this.http.get(this.URL_API + '/account/getProfile', { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
+  async UpdateProfile(data){
+    const res = await this.http.post(this.URL_API + '/account/updateProfile', data,{ responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async resetpassword(data: any){
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const res = await this.http.post(this.URL_API + '/account/changePassword',JSON.stringify(data), { headers, responseType: 'json'}).toPromise()
@@ -111,9 +127,6 @@ export class AuthenticationService {
       return false;
     }
   }
-
-
-
   
   getUserLoggedIn(): Observable<boolean> {
     return this.authState.asObservable();

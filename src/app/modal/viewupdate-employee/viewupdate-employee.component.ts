@@ -42,9 +42,6 @@ export class ViewupdateEmployeeComponent implements OnInit {
       {description:'Female',value:0}
     ]
     this.employeeForm = this.builder.group({
-      'departmentId':[
-        '',[Validators.required]
-      ],
       'name':[
         '',[Validators.required]
       ],
@@ -55,10 +52,10 @@ export class ViewupdateEmployeeComponent implements OnInit {
         '',[Validators.required]
       ],
       'nric':[
-        '',[Validators.required]
+        ''
       ],
       'empNo':[
-        '',[Validators.required]
+        ''
       ],
       'address':[
         ''
@@ -115,26 +112,21 @@ export class ViewupdateEmployeeComponent implements OnInit {
       loader.present();
       var form = this.employeeForm.value;
 
-      var imgdata;
-      if(this.fileData){
-        imgdata = this.fileData;
-      }else{
-        imgdata = '';
-      }
-
       const formData = new FormData();
-      formData.append('departmentId', form.departmentId);
       formData.append('name', form.name);
       formData.append('phone', form.phone);
       formData.append('sex', form.sex);
       formData.append('empNo', form.empNo);
       formData.append('nric', form.nric);
       formData.append('address', form.address);
-      formData.append('img', imgdata);
-      const res = await this.clientservice.addEmployee(formData);
+      if(this.fileData){
+        formData.append('img', this.fileData);
+      }
+      
+      const res = await this.clientservice.updateEmployee(this.employeeid,formData);
 
       if(res['code'] == 0){
-       this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
+       this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgUpdate);
        this.modalCtrl.dismiss();
       }else{
         this.notification.errorNotification(res['code'],res['msg']);

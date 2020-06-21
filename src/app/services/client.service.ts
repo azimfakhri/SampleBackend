@@ -65,8 +65,8 @@ export class ClientService {
     return res;
   }
 
-  async addEmployee(data){
-    const res = await this.http.post(this.URL_API + '/manage/addEmployee',data, { responseType: 'json'}).toPromise()
+  async addEmployeeByDepartment(id,data){
+    const res = await this.http.post(this.URL_API + '/manage/addEmployeeByDepartment/'+id,data, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 
