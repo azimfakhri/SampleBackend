@@ -136,4 +136,10 @@ export class AppComponent {
     return await modal.present();
   }
 
+  Profile(){
+    this.navctrl.navigateRoot('/profile',{
+      replaceUrl:true
+    })
+  }
+
 }

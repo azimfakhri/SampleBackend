@@ -30,9 +30,9 @@ export class AuthenticationService {
       if (location && !this.disabledRedirectFor.find(path => {
         return location.pathname.includes(path)
       })){
-        // if(!this.isAuthenticated()){
-        //   this.logout();
-        // }
+        if(!this.isAuthenticatedv2()){
+          this.navCtrl.navigateRoot('/login');
+        }
       }else{
         if(this.isAuthenticated()){
           this.navCtrl.navigateRoot('/home');
@@ -57,7 +57,7 @@ export class AuthenticationService {
      .catch(err => { console.log(err);
     });
 
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       
       sessionStorage.setItem('user-token', res['data'][0].token);
       sessionStorage.setItem('userFullName', res['data'][0].userFullName);
@@ -129,7 +129,7 @@ export class AuthenticationService {
         return false;
     });
 
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       sessionStorage.setItem('user-token', res['data'][0].newToken);  
       this.authState.next(true);
       return true;

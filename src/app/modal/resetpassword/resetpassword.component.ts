@@ -46,7 +46,7 @@ export class ResetpasswordComponent implements OnInit {
           }
 
           const res = await this.authservice.resetpassword(pw);
-          if(res['code'] == "0"){
+          if(res['code'] == 0){
             this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgPassword);
             this.modalCtrl.dismiss();
            }else{
@@ -64,7 +64,7 @@ export class ResetpasswordComponent implements OnInit {
         }
   
         const res = await this.adminservice.ResetUserPassword(this.user.userId,data);
-          if(res['code'] == "0"){
+          if(res['code'] == 0){
             this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgPassword);
             this.modalCtrl.dismiss();
            }else{

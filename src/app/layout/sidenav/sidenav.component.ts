@@ -47,18 +47,33 @@ export class SidenavComponent implements OnInit {
       {
         label: 'Department',
         icon: 'business',
-        link: 'department'
+        items: [
+          {
+            label: 'Manage Department',
+            link: 'department',
+            icon: 'settings'
+          },
+          {
+            label: 'Manage Equipment',
+            link: '/bindequipment',
+            icon: 'swap_horiz'
+          }
+        ]
       },
       {
         label: 'Employee',
         icon: 'people',
         items: [
           {
-            label: 'List Employee',
+            label: 'Manage Employee',
             link: 'employee',
-            icon: 'person_search'
+            icon: 'settings'
           },
-          
+          {
+            label: 'Bind Employee',
+            link: 'bindemployee',
+            icon: 'swap_horiz'
+          }
         ]
       },
     ];

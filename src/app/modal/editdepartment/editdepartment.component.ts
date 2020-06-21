@@ -43,7 +43,7 @@ export class EditdepartmentComponent implements OnInit {
 
       const res = await this.clientservice.updateDepartment(this.department.departmentId,data);
 
-      if(res['code'] == "0"){
+      if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgUpdate);
        this.modalCtrl.dismiss();
       }else{

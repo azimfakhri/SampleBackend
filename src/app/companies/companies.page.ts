@@ -38,7 +38,7 @@ export class CompaniesPage implements OnInit {
     loader.present();
 
     const res = await this.adminservice.GetCompanyList();
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       this.companieslist =  res['data'];
 
       this.companieslist.forEach(element => {

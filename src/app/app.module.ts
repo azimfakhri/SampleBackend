@@ -30,6 +30,8 @@ import { ImageService } from './services/image.service';
 import { ClientService } from './services/client.service';
 import { AdddepartmentComponent } from './modal/adddepartment/adddepartment.component';
 import { EditdepartmentComponent } from './modal/editdepartment/editdepartment.component';
+import { AddemployeeComponent } from './modal/addemployee/addemployee.component';
+import { ViewupdateEmployeeComponent } from './modal/viewupdate-employee/viewupdate-employee.component';
 
 
 export function tokenGetter() {
@@ -44,7 +46,9 @@ export function tokenGetter() {
     AddequipmentComponent,
     AdduserComponent,
     AdddepartmentComponent,
-    EditdepartmentComponent
+    EditdepartmentComponent,
+    AddemployeeComponent,
+    ViewupdateEmployeeComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
@@ -53,7 +57,9 @@ export function tokenGetter() {
     AddequipmentComponent,
     AdduserComponent,
     AdddepartmentComponent,
-    EditdepartmentComponent
+    EditdepartmentComponent,
+    AddemployeeComponent,
+    ViewupdateEmployeeComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,

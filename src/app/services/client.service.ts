@@ -41,6 +41,14 @@ export class ClientService {
     return res;
   }
 
+  async getAllEmployees(){
+    const res = await this.http.get(this.URL_API + '/manage/getAllEmployees', { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async getEmployeesByDepartment(id){
     const res = await this.http.get(this.URL_API + '/manage/getEmployeesByDepartment/' + id, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
@@ -66,7 +74,7 @@ export class ClientService {
   }
 
   async updateEmployee(id,data){
-    const res = await this.http.post(this.URL_API + '/manage/updateEmployee' + id,data, { responseType: 'json'}).toPromise()
+    const res = await this.http.post(this.URL_API + '/manage/updateEmployee/' + id,data, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 
@@ -74,7 +82,7 @@ export class ClientService {
   }
 
   async deleteEmployee(id){
-    const res = await this.http.post(this.URL_API + '/manage/deleteEmployee' + id, { responseType: 'json'}).toPromise()
+    const res = await this.http.post(this.URL_API + '/manage/deleteEmployee/' + id, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 
@@ -90,7 +98,7 @@ export class ClientService {
   }
 
   async updateEquipment(id,data){
-    const res = await this.http.post(this.URL_API + '/manage/updateEquipment' + id,data, { responseType: 'json'}).toPromise()
+    const res = await this.http.post(this.URL_API + '/manage/updateEquipment/' + id,data, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 

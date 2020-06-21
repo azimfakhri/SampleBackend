@@ -5,17 +5,23 @@
     <mat-divider></mat-divider>
   </div>
 
-  <div>
-    <button mat-flat-button color="warn" class="btn-margin-right" (click)="navigateBack()" aria-label="back">
+  <div class="divaddfilter">
+    <button mat-flat-button color="warn"  class="btn-margin-right addfilter" (click)="navigateBack()" aria-label="back">
       <mat-icon>arrow_back</mat-icon> Back
     </button>
-    <button mat-flat-button color="primary" class="btn-margin-right" (click)="AddEquipment()" aria-label="add equipment">
+    <button mat-flat-button color="primary" class="btn-margin-right addfilter" (click)="AddEquipment()" aria-label="add equipment">
       <mat-icon>add_circle_outline</mat-icon> Add Equipment
     </button>
+
+    <mat-form-field appearance="outline" class="form-right form-filter">
+      <mat-label>Filter Equipment</mat-label>
+      <input matInput (keyup)="applyFilter($event)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
   </div>
   
   <mat-list>
-    <mat-list-item *ngFor="let eq of equipmentList">
+    <mat-list-item *ngFor="let eq of filteredList">
       <mat-divider></mat-divider>
       <div mat-line>{{eq.sn}}</div>
       <button mat-icon-button (click)="DeleteEquipment(eq)" aria-label="delete equipment">

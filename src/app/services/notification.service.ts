@@ -21,16 +21,16 @@ export class NotificationService {
   async errorNotification(indicator,msg=""){
     var output='';
     switch (indicator) {
-      case '1':
+      case 1:
         output = config.message.error.desc1;
         break;
-      case '2':
+      case 2:
         output = config.message.error.desc2;
         break;
-      case '3':
+      case 3:
         output = msg;
         break;  
-      case '401':
+      case 401:
         output = config.message.error.desc401;
         break;  
       default:

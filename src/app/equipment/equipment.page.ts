@@ -13,6 +13,7 @@ import { AdminService } from '../services/admin.service';
 })
 export class EquipmentPage implements OnInit {
   equipmentList:any = [];
+  filteredList:any = [];
   company:any;
   constructor(
     private modalCtrl:ModalController,
@@ -48,8 +49,9 @@ export class EquipmentPage implements OnInit {
     loader.present();
 
     const res = await this.adminservice.GetEquipmentList(this.company.companyId);
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       this.equipmentList =  res['data'];
+      this.filteredList = this.equipmentList;
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
     }
@@ -64,7 +66,7 @@ export class EquipmentPage implements OnInit {
     .then(async (val) => {
       if(val.role == "delete"){
         const res = await this.adminservice.DeleteEquipment(eq.equipmentId);
-        if(res['code'] == "0"){
+        if(res['code'] == 0){
           this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
           this.GetEquipment();
         }else{
@@ -92,6 +94,16 @@ export class EquipmentPage implements OnInit {
 
   navigateBack(){
     this.navCtrl.navigateBack('/companies');
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    var temp = this.equipmentList;
+
+    this.filteredList = temp.filter(function(eq){
+      return eq.sn.toLowerCase().includes(filterValue.trim().toLowerCase());
+    });
   }
 
 }
