@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="modalHeader">
     <ion-title>
-      Company
+      Employee
     </ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="close()">X</ion-button>
@@ -10,16 +10,15 @@
 </ion-header>
 <div class="inner-content">
   <div class="form-padding">
-    <form [formGroup]="companyForm">
-      <div>Company Name</div>
-      <ion-input formControlName="companyName" class="input-style"></ion-input>
+    Department : 
+    <mat-select id="department" [(ngModel)]="selectedDepartment" required>
+      <mat-option *ngFor="let id of departmentList" [value]="id.departmentId">
+        {{id.departmentName}}
+      </mat-option>
+    </mat-select>
 
-      <div>Company Logo</div>
-            <input type="file" name="image" accept="image/*" formControlName="logo" (change)="fileProgress($event)" />
-            <div class="image-preview" *ngIf="previewUrl">
-              <img [src]="previewUrl" height="150" />                 
-            </div>
-    </form>
+    <div>Upload File (.xlsx only)</div>
+    <input type="file" name="image" accept=".xlsx" (change)="fileProgress($event)" />
   </div>
 </div>
 <ion-footer>

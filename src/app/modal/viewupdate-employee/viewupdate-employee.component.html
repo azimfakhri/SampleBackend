@@ -49,7 +49,7 @@
         <ion-row *ngIf="editable">
           <ion-col size="6">
             <div>Employee Image</div>
-            <input type="file" name="image" (change)="fileProgress($event)" />
+            <input type="file" name="image" accept="image/*" (change)="fileProgress($event)" />
             <div class="image-preview" *ngIf="previewUrl">
               <img [src]="previewUrl" height="150" />                 
             </div>

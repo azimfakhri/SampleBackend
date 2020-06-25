@@ -5,6 +5,7 @@ import { NotificationService } from '../services/notification.service';
 import { AddemployeeComponent } from '../modal/addemployee/addemployee.component';
 import * as config from '../config'
 import { ViewupdateEmployeeComponent } from '../modal/viewupdate-employee/viewupdate-employee.component';
+import { AddbatchemployeeComponent } from '../modal/addbatchemployee/addbatchemployee.component';
 
 @Component({
   selector: 'app-employee',
@@ -90,6 +91,20 @@ export class EmployeePage implements OnInit {
   async AddEmployee(){
     const modal = await this.modalCtrl.create({
       component: AddemployeeComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      this.getDepartment();
+     
+    });
+    return await modal.present();
+  }
+
+  async AddEmployeeBatch(){
+    const modal = await this.modalCtrl.create({
+      component: AddbatchemployeeComponent,
       backdropDismiss:false,
       cssClass:'auto-height',
     });

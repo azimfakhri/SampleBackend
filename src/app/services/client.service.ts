@@ -89,6 +89,14 @@ export class ClientService {
     return res;
   }
 
+  async addEmployeesByBatch(id,data){
+    const res = await this.http.post(this.URL_API + '/manage/addEmployeesByBatch/' + id,data, { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async getEquipments(){
     const res = await this.http.get(this.URL_API + '/manage/getEquipments', { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);

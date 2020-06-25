@@ -59,7 +59,7 @@
         <ion-row>
           <ion-col size="6">
             <div>Employee Image</div>
-            <input type="file" name="image"  formControlName="img" (change)="fileProgress($event)" />
+            <input type="file" name="image" accept="image/*" formControlName="img" (change)="fileProgress($event)" />
             <div class="image-preview" *ngIf="previewUrl">
               <img [src]="previewUrl" height="150" />                 
             </div>
