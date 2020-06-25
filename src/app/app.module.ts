@@ -34,6 +34,7 @@ import { AddemployeeComponent } from './modal/addemployee/addemployee.component'
 import { ViewupdateEmployeeComponent } from './modal/viewupdate-employee/viewupdate-employee.component';
 import { ViewupdateprofileComponent } from './modal/viewupdateprofile/viewupdateprofile.component';
 import { BindequipmentComponent } from './modal/bindequipment/bindequipment.component';
+import { BindemployeeComponent } from './modal/bindemployee/bindemployee.component';
 
 
 export function tokenGetter() {
@@ -52,7 +53,8 @@ export function tokenGetter() {
     AddemployeeComponent,
     ViewupdateEmployeeComponent,
     ViewupdateprofileComponent,
-    BindequipmentComponent
+    BindequipmentComponent,
+    BindemployeeComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
@@ -65,7 +67,8 @@ export function tokenGetter() {
     AddemployeeComponent,
     ViewupdateEmployeeComponent,
     ViewupdateprofileComponent,
-    BindequipmentComponent
+    BindequipmentComponent,
+    BindemployeeComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,

@@ -23,7 +23,8 @@
   <mat-list>
     <mat-list-item *ngFor="let eq of filteredList">
       <mat-divider></mat-divider>
-      <div mat-line>{{eq.sn}}</div>
+      <div mat-line>Name: {{eq.name}}</div>
+      <div mat-line>Serial No: {{eq.sn}}</div>
       <button *ngIf="usertype == 2" mat-icon-button (click)="ViewDepartment(eq)" aria-label="View Department">
         <mat-icon>build</mat-icon>
       </button>

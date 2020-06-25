@@ -9,10 +9,20 @@
   </ion-toolbar>
 </ion-header>
 <div class="inner-content">
+  <div class="form-padding">
+    <div>Equipment Name</div>
+    <ion-input [(ngModel)]="name" required class="input-style"></ion-input>
 
+    <div style="padding-top: 15px;">Department</div>
+    <mat-selection-list [(ngModel)]="selectedDepartment">
+      <mat-list-option *ngFor="let dep of departmentList"  [value]="dep.departmentId">
+        {{dep.departmentName}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
 </div>
 <ion-footer>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-grid>
       <ion-row>
         <ion-col>

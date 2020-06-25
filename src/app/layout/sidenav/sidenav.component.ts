@@ -45,6 +45,11 @@ export class SidenavComponent implements OnInit {
         link: 'home'
       },
       {
+        label: 'Employee',
+        icon: 'people',
+        link: 'employee'
+      },
+      {
         label: 'Department',
         icon: 'business',
         items: [
@@ -59,23 +64,8 @@ export class SidenavComponent implements OnInit {
             icon: 'swap_horiz'
           }
         ]
-      },
-      {
-        label: 'Employee',
-        icon: 'people',
-        items: [
-          {
-            label: 'Manage Employee',
-            link: 'employee',
-            icon: 'settings'
-          },
-          {
-            label: 'Bind Employee',
-            link: 'bindemployee',
-            icon: 'swap_horiz'
-          }
-        ]
-      },
+      }
+      
     ];
 
     if(sessionStorage.getItem('usertype') == "1"){

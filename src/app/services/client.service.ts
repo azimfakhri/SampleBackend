@@ -105,4 +105,12 @@ export class ClientService {
     return res;
   }
 
+  async bindEmployeesToDepartment(data){
+    const res = await this.http.post(this.URL_API + '/manage/bindEmployeesToDepartment',data, { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
 }

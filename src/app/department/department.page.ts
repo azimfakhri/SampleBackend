@@ -5,6 +5,7 @@ import { ClientService } from '../services/client.service';
 import { AdddepartmentComponent } from '../modal/adddepartment/adddepartment.component';
 import * as config from '../config'
 import { EditdepartmentComponent } from '../modal/editdepartment/editdepartment.component';
+import { BindemployeeComponent } from '../modal/bindemployee/bindemployee.component';
 
 @Component({
   selector: 'app-department',
@@ -60,6 +61,23 @@ export class DepartmentPage implements OnInit {
   async UpdateDepartment(dep){
     const modal = await this.modalCtrl.create({
       component: EditdepartmentComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps:{
+        department:dep
+      } 
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      this.getDepartment();
+     
+    });
+    return await modal.present();
+  }
+
+  async BindEmployee(dep){
+    const modal = await this.modalCtrl.create({
+      component: BindemployeeComponent,
       backdropDismiss:false,
       cssClass:'auto-height',
       componentProps:{
