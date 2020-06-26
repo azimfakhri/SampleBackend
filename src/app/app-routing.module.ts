@@ -42,6 +42,12 @@ const routes: Routes = [
     loadChildren: () => import('./bindemployee/bindemployee.module').then( m => m.BindemployeePageModule),
     canActivate:[AuthGuardService]
   },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule),
+    canActivate:[AuthGuardService]
+  },
+
 
 
 ];

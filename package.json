@@ -28,6 +28,7 @@
     "@ng-idle/keepalive": "^8.0.0-beta.4",
     "core-js": "^2.5.4",
     "crypto-js": "^3.2.1",
+    "file-saver": "^2.0.2",
     "moment": "^2.24.0",
     "ng-material-multilevel-menu": "^4.12.2",
     "ngx-pagination": "^5.0.0",

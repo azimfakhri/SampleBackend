@@ -1,0 +1,77 @@
+<ion-content class="padding-content">
+
+  <h4>Report</h4>
+  
+  <div class="divider-padding">
+    <mat-divider></mat-divider>
+  </div>
+  <form [formGroup]="searchForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>Name</div>
+          <ion-input formControlName="name" class="input-style"></ion-input>
+        </ion-col>
+        <ion-col>
+          <div>Employee Number</div>
+          <ion-input formControlName="empNo" class="input-style"></ion-input>
+        </ion-col>
+        <ion-col>
+          <div>NRIC/Passport Number</div>
+          <ion-input formControlName="nric" class="input-style"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>Access From</div>
+          <input class="dtpicker input-style" [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" formControlName="from" >
+        </ion-col>
+        <ion-col >
+          <div>To</div>
+          <input class="dtpicker input-style" [matDatepicker]="myDatepicker2" (click)="myDatepicker2.open()" formControlName="to" >
+        </ion-col>
+        <ion-col>
+          <div>Order By</div>
+          <mat-radio-group formControlName="order">
+            <mat-radio-button value="ASC">Ascending</mat-radio-button>
+            <mat-radio-button value="DESC">Descending</mat-radio-button>
+          </mat-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button class="proceed-btn-form" type="button" (click)="search()">Search</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+  </form>
+  <mat-datepicker #myDatepicker></mat-datepicker>
+  <mat-datepicker #myDatepicker2></mat-datepicker>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>Name</ion-col>
+      <ion-col>Employee No</ion-col>
+      <ion-col>Access Time</ion-col>
+      <ion-col>Temperature</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of searchResults | paginate: { itemsPerPage: 100, currentPage: p }">
+      <ion-col>
+        <div>{{item.name}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.employeeNo}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.accessTime}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.temperature}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="float: right;">
+    <pagination-controls (pageChange)="p = $event;changePage($event);"></pagination-controls>
+    <ion-button *ngIf="searchResults.length > 0" class="proceed-btn-form" type="button" (click)="export()">Export</ion-button>
+  </div>
+</ion-content>

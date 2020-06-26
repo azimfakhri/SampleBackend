@@ -78,6 +78,7 @@ export class AddbatchemployeeComponent implements OnInit {
         for (let index = 0; index < this.employeeList.length; index++) {
           this.employeeList[index].sex =parseInt(this.employeeList[index].sex);
         }
+        
         const res = await this.clientservice.addEmployeesByBatch(this.selectedDepartment,this.employeeList);
     
         if(res['code'] == 0){

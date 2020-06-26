@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders,HttpClient } from '@angular/common/http';
+import { HttpHeaders,HttpClient, HttpParams } from '@angular/common/http';
 import {environment} from 'src/environments/environment'
 
 @Injectable({
@@ -115,6 +115,16 @@ export class ClientService {
 
   async bindEmployeesToDepartment(data){
     const res = await this.http.post(this.URL_API + '/manage/bindEmployeesToDepartment',data, { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
+  async getAccessByEquipment(id,data){
+    const res = await this.http.get(this.URL_API + '/report/getAccessByEquipment/' + id, {
+      params:data
+    }).toPromise()
      .catch(err => { console.log(err);
     });
 
