@@ -9,11 +9,6 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule),
-    canActivate:[AuthGuardService]
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -42,6 +37,18 @@ const routes: Routes = [
     loadChildren: () => import('./department/department.module').then( m => m.DepartmentPageModule),
     canActivate:[AuthGuardService]
   },
+  {
+    path: 'bindemployee',
+    loadChildren: () => import('./bindemployee/bindemployee.module').then( m => m.BindemployeePageModule),
+    canActivate:[AuthGuardService]
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule),
+    canActivate:[AuthGuardService]
+  },
+
+
 
 ];
 

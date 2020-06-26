@@ -30,9 +30,9 @@ export class AuthenticationService {
       if (location && !this.disabledRedirectFor.find(path => {
         return location.pathname.includes(path)
       })){
-        // if(!this.isAuthenticated()){
-        //   this.logout();
-        // }
+        if(!this.isAuthenticatedv2()){
+          this.navCtrl.navigateRoot('/login');
+        }
       }else{
         if(this.isAuthenticated()){
           this.navCtrl.navigateRoot('/home');
@@ -40,6 +40,22 @@ export class AuthenticationService {
       }
       
     });
+  }
+
+  async GetProfile(){
+    const res = await this.http.get(this.URL_API + '/account/getProfile', { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
+  async UpdateProfile(data){
+    const res = await this.http.post(this.URL_API + '/account/updateProfile', data,{ responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
   }
 
   async resetpassword(data: any){
@@ -57,7 +73,7 @@ export class AuthenticationService {
      .catch(err => { console.log(err);
     });
 
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       
       sessionStorage.setItem('user-token', res['data'][0].token);
       sessionStorage.setItem('userFullName', res['data'][0].userFullName);
@@ -111,9 +127,6 @@ export class AuthenticationService {
       return false;
     }
   }
-
-
-
   
   getUserLoggedIn(): Observable<boolean> {
     return this.authState.asObservable();
@@ -129,7 +142,7 @@ export class AuthenticationService {
         return false;
     });
 
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       sessionStorage.setItem('user-token', res['data'][0].newToken);  
       this.authState.next(true);
       return true;

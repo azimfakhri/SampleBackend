@@ -45,22 +45,27 @@ export class SidenavComponent implements OnInit {
         link: 'home'
       },
       {
-        label: 'Department',
-        icon: 'business',
-        link: 'department'
-      },
-      {
         label: 'Employee',
         icon: 'people',
+        link: 'employee'
+      },
+      {
+        label: 'Department',
+        icon: 'business',
         items: [
           {
-            label: 'List Employee',
-            link: 'employee',
-            icon: 'person_search'
+            label: 'Manage Department',
+            link: 'department',
+            icon: 'settings'
           },
-          
+          {
+            label: 'Manage Equipment',
+            link: 'equipment',
+            icon: 'swap_horiz'
+          }
         ]
-      },
+      }
+      
     ];
 
     if(sessionStorage.getItem('usertype') == "1"){

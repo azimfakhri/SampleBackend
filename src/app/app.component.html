@@ -6,14 +6,18 @@
       <ion-buttons slot="start">
         <ion-button color="primary" (click)="sideNav.toggle()"><ion-icon slot="icon-only" name="menu"></ion-icon></ion-button>
       </ion-buttons>
-      <img slot="start" src="assets/logo.svg" width="30px" style="display:inline-block" height="30px"/>
+      <!-- <img slot="start" src="assets/logo.svg" width="30px" style="display:inline-block" height="30px"/> -->
       <ion-title slot="start">
-        MTS
+        MTS 
       </ion-title>
+      <ion-label>*Testing Environment*</ion-label>
       <ion-buttons slot="end">
         <!-- <ion-button fill="solid" color="warning" (click)="logout()">Logout</ion-button> -->
-        {{getLoginID()}}
+        <p>{{getLoginID()}}</p>
         <mat-select class="usermenu">
+          <mat-option (click)="Profile()">
+            Profile
+          </mat-option>
           <mat-option (click)="ChangePassword()">
             Change Password
           </mat-option>

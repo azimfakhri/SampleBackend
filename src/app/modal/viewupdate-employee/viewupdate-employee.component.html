@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="modalHeader">
+    <ion-title>
+      Employee
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="inner-content">
+  <div class="form-padding">
+    <form [formGroup]="employeeForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>Full Name</div>
+            <ion-input formControlName="name" class="input-style" [disabled]="!editable"></ion-input>
+          </ion-col>
+          <ion-col>
+            <div>Phone Number</div>
+            <ion-input formControlName="phone" class="input-style" [disabled]="!editable"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>Sex</div>
+            <mat-select name="sex" formControlName="sex" [disabled]="!editable">
+              <mat-option *ngFor="let id of genderList" [value]="id.value">
+                {{id.description}}
+              </mat-option>
+            </mat-select>
+          </ion-col>
+          <ion-col>
+            <div>Employee Number</div>
+            <ion-input formControlName="empNo" class="input-style" [disabled]="!editable"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>NRIC/Passport Number</div>
+            <ion-input formControlName="nric" class="input-style" [disabled]="!editable"></ion-input>
+          </ion-col>
+          <ion-col>
+            <div>Address</div>
+            <ion-input formControlName="address" class="input-style" [disabled]="!editable"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="editable">
+          <ion-col size="6">
+            <div>Employee Image</div>
+            <input type="file" name="image" accept="image/*" (change)="fileProgress($event)" />
+            <div class="image-preview" *ngIf="previewUrl">
+              <img [src]="previewUrl" height="150" />                 
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</div>
+<ion-footer>
+  <ion-toolbar >
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngIf="editable">
+          <ion-button class="proceed-btn-form" type="button" (click)="proceed()">Submit</ion-button>
+        </ion-col>
+        <ion-col *ngIf="!editable">
+          <ion-button class="proceed-btn-form" type="button" (click)="close()">Done</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

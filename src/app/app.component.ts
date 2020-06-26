@@ -11,6 +11,7 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { NotificationService } from './services/notification.service';
 import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
+import { ViewupdateprofileComponent } from './modal/viewupdateprofile/viewupdateprofile.component';
 
 @Component({
   selector: 'app-root',
@@ -130,6 +131,15 @@ export class AppComponent {
   async ChangePassword(){
     const modal = await this.modalCtrl.create({
       component: ResetpasswordComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height'
+    });
+    return await modal.present();
+  }
+
+  async Profile(){
+    const modal = await this.modalCtrl.create({
+      component: ViewupdateprofileComponent,
       backdropDismiss:false,
       cssClass:'auto-height'
     });

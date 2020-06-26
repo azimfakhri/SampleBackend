@@ -14,8 +14,6 @@ export class AddcompanyComponent implements OnInit {
   companyForm:any;
   fileData: File = null;
   previewUrl:any = null;
-  fileUploadProgress: string = null;
-  uploadedFilePath: string = null;
   constructor(
     private modalCtrl:ModalController,
     public builder : FormBuilder,
@@ -76,7 +74,7 @@ export class AddcompanyComponent implements OnInit {
       formData.append('logo', this.fileData);
       const res = await this.adminservice.AddNewCompany(formData);
 
-      if(res['code'] == "0"){
+      if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
        this.modalCtrl.dismiss();
       }else{

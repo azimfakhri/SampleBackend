@@ -14,6 +14,7 @@ import { AdminService } from '../services/admin.service';
 })
 export class UsersPage implements OnInit {
   userlist:any =[];
+  filteredList:any =[];
   company:any;
   constructor(
     private modalCtrl:ModalController,
@@ -49,8 +50,9 @@ export class UsersPage implements OnInit {
     loader.present();
 
     const res = await this.adminservice.GetUserList(this.company.companyId);
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       this.userlist =  res['data'];
+      this.filteredList = this.userlist;
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
     }
@@ -94,7 +96,7 @@ export class UsersPage implements OnInit {
     .then(async (val) => {
       if(val.role == "delete"){
         const res = await this.adminservice.DeleteUser(user.userId);
-        if(res['code'] == "0"){
+        if(res['code'] == 0){
           this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
           this.GetUsers();
         }else{
@@ -106,5 +108,15 @@ export class UsersPage implements OnInit {
 
   navigateBack(){
     this.navCtrl.navigateBack('/companies');
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    var temp = this.userlist;
+
+    this.filteredList = temp.filter(function(user){
+      return (user.fullName.toLowerCase().includes(filterValue.trim().toLowerCase()) || user.username.toLowerCase().includes(filterValue.trim().toLowerCase()));
+    });
   }
 }

@@ -39,7 +39,7 @@ export class AddequipmentComponent implements OnInit {
 
       const res = await this.adminservice.AddNewEquipment(data);
 
-      if(res['code'] == "0"){
+      if(res['code'] == 0){
         this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
         this.modalCtrl.dismiss();
       }else{

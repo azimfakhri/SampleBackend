@@ -10,6 +10,8 @@ export let message ={
         "SuccessMsgUpdate":"Record successfully updated",
         "SuccessMsgDelete":"Record successfully deleted",
         "SuccessMsgPassword":"Password changed",
+        "SelectionWarning" : "Please select at least one choice",
+        "UploadBatchWarning" : "File is empty"
         
     },
     error:{

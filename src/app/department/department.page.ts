@@ -5,6 +5,7 @@ import { ClientService } from '../services/client.service';
 import { AdddepartmentComponent } from '../modal/adddepartment/adddepartment.component';
 import * as config from '../config'
 import { EditdepartmentComponent } from '../modal/editdepartment/editdepartment.component';
+import { BindemployeeComponent } from '../modal/bindemployee/bindemployee.component';
 
 @Component({
   selector: 'app-department',
@@ -13,6 +14,7 @@ import { EditdepartmentComponent } from '../modal/editdepartment/editdepartment.
 })
 export class DepartmentPage implements OnInit {
   departmentList:any = [];
+  filteredList:any = [];
   constructor(
     private modalCtrl:ModalController,
     private navCtrl : NavController,
@@ -33,8 +35,9 @@ export class DepartmentPage implements OnInit {
     loader.present();
 
     const res = await this.clientservice.getDepartmentList();
-    if(res['code'] == "0"){
+    if(res['code'] == 0){
       this.departmentList =  res['data'];
+      this.filteredList = this.departmentList;
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
     }
@@ -72,6 +75,23 @@ export class DepartmentPage implements OnInit {
     return await modal.present();
   }
 
+  async BindEmployee(dep){
+    const modal = await this.modalCtrl.create({
+      component: BindemployeeComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps:{
+        department:dep
+      } 
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      this.getDepartment();
+     
+    });
+    return await modal.present();
+  }
+
   async DeleteDepartment(dep){
     var res = await this.notification.DeleteConfirmation(config.message.alert.DelTitle,config.message.alert.DelMsg);
     res.present();
@@ -80,13 +100,23 @@ export class DepartmentPage implements OnInit {
     .then(async (val) => {
       if(val.role == "delete"){
         const res = await this.clientservice.deleteDepartment(dep.departmentId);
-        if(res['code'] == "0"){
+        if(res['code'] == 0){
           this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
           this.getDepartment();
         }else{
            this.notification.errorNotification(res['code'],res['msg']);
         }
       }
+    });
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    var temp = this.departmentList;
+
+    this.filteredList = temp.filter(function(dep){
+      return dep.departmentName.toLowerCase().includes(filterValue.trim().toLowerCase());
     });
   }
 

@@ -1,3 +1,53 @@
 <ion-content class="padding-content">
   <h4>List Employee</h4>
+
+  <div class="divider-padding">
+    <mat-divider></mat-divider>
+  </div>
+
+  <div>
+    <button mat-flat-button class="btn-margin-right addfilter" (click)="AddEmployee()" color="primary"  aria-label="add employee">
+      <mat-icon>add_circle_outline</mat-icon> Add Employee
+    </button>
+    <button mat-flat-button class="btn-margin-right addfilter" (click)="AddEmployeeBatch()" color="primary"  aria-label="add bulk">
+      <mat-icon>arrow_circle_up</mat-icon> Add Employee by Batch
+    </button>
+  </div>
+
+  <div class="divaddfilter">
+    Department : 
+    <mat-select id="department" [(ngModel)]="selectedDepartment"  (selectionChange)="getAllEmployee()">
+      <mat-option *ngFor="let id of departmentList" [value]="id.departmentId">
+        {{id.departmentName}}
+      </mat-option>
+    </mat-select>
+
+    <mat-form-field appearance="outline" class="form-right form-filter">
+      <mat-label>Filter Name/Emp. No/Department</mat-label>
+      <input matInput (keyup)="applyFilter($event)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-list>
+      <mat-list-item *ngFor="let emp of filteredList">
+        <mat-divider></mat-divider>
+        <img matListAvatar>
+        <div mat-line>Name: {{emp.name}}</div>
+        <div mat-line>Employee No: {{emp.empNo}}</div>
+        <div mat-line>Department: {{emp.departmentName ? emp.departmentName : selectedDepartmentName }}</div>
+        
+        <button mat-icon-button (click)="ViewEmployee(emp)" aria-label="View Employee">
+          <mat-icon>preview</mat-icon>
+        </button>
+        <button mat-icon-button (click)="UpdateEmployee(emp)" aria-label="Update Employee">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="DeleteEmployee(emp)" aria-label="Delete Employee">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </ion-content>

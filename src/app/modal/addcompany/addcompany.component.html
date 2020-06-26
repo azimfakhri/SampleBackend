@@ -15,7 +15,7 @@
       <ion-input formControlName="companyName" class="input-style"></ion-input>
 
       <div>Company Logo</div>
-            <input type="file" name="image"  formControlName="logo" (change)="fileProgress($event)" />
+            <input type="file" name="image" accept="image/*" formControlName="logo" (change)="fileProgress($event)" />
             <div class="image-preview" *ngIf="previewUrl">
               <img [src]="previewUrl" height="150" />                 
             </div>

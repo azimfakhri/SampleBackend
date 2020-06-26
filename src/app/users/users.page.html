@@ -5,17 +5,23 @@
     <mat-divider></mat-divider>
   </div>
 
-  <div>
-    <button mat-flat-button color="warn" class="btn-margin-right" (click)="navigateBack()" aria-label="back">
+  <div class="divaddfilter">
+    <button mat-flat-button color="warn" class="btn-margin-right addfilter" (click)="navigateBack()" aria-label="back">
       <mat-icon>arrow_back</mat-icon> Back
     </button>
-    <button mat-flat-button color="primary" class="btn-margin-right" (click)="AddUser()" aria-label="add equipment">
+    <button mat-flat-button color="primary" class="btn-margin-right addfilter" (click)="AddUser()" aria-label="add equipment">
       <mat-icon>add_circle_outline</mat-icon> Add User
     </button>
+
+    <mat-form-field appearance="outline" class="form-right form-filter">
+      <mat-label>Filter Users</mat-label>
+      <input matInput (keyup)="applyFilter($event)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
   </div>
   
   <mat-list>
-    <mat-list-item *ngFor="let user of userlist">
+    <mat-list-item *ngFor="let user of filteredList">
       <mat-divider></mat-divider>
       <div mat-line>Full Name: {{user.fullName}}</div>
       <div mat-line>Username: {{user.username}}</div>

@@ -5,22 +5,34 @@
     <mat-divider></mat-divider>
   </div>
 
-  <button mat-flat-button color="primary" (click)="AddDepartment()" aria-label="add department">
-    <mat-icon>add_circle_outline</mat-icon> Add Department
-  </button>
-  <mat-list>
-    <mat-list-item *ngFor="let com of departmentList">
-      <mat-divider></mat-divider>
-      <div mat-line>{{com.departmentName}}</div>
-      <button mat-icon-button (click)="UpdateDepartment(com)" aria-label="Delete Department">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button (click)="DeleteDepartment(com)" aria-label="Delete Department">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <button mat-icon-button aria-label="List Employee">
-        <mat-icon>people</mat-icon>
-      </button>
-    </mat-list-item>
-  </mat-list>
+  <div class="divaddfilter">
+    <button mat-flat-button class="addfilter" color="primary" (click)="AddDepartment()" aria-label="add department">
+      <mat-icon>add_circle_outline</mat-icon> Add Department
+    </button>
+
+    <mat-form-field appearance="outline" class="form-right form-filter">
+      <mat-label>Filter Department</mat-label>
+      <input matInput (keyup)="applyFilter($event)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-list>
+      <mat-list-item *ngFor="let com of filteredList">
+        <mat-divider></mat-divider>
+        <div mat-line>{{com.departmentName}}</div>
+        <button mat-icon-button (click)="UpdateDepartment(com)" aria-label="Delete Department">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="BindEmployee(com)" aria-label="Delete Department">
+          <mat-icon>people</mat-icon>
+        </button>
+        <button mat-icon-button (click)="DeleteDepartment(com)" aria-label="Delete Department">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  
 </ion-content>

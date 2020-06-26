@@ -58,7 +58,7 @@ export class AdduserComponent implements OnInit {
 
         //API Code
         const res = await this.adminservice.AddNewUser(this.company.companyId,this.userForm.value);
-        if(res['code'] == "0"){
+        if(res['code'] == 0){
           this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
           this.modalCtrl.dismiss();
          }else{
