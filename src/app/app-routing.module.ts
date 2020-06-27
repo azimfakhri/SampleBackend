@@ -47,6 +47,16 @@ const routes: Routes = [
     loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule),
     canActivate:[AuthGuardService]
   },
+  {
+    path: 'public',
+    loadChildren: () => import('./public/public.module').then( m => m.PublicPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+
+
 
 
 

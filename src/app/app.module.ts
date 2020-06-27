@@ -36,6 +36,10 @@ import { ViewupdateprofileComponent } from './modal/viewupdateprofile/viewupdate
 import { BindequipmentComponent } from './modal/bindequipment/bindequipment.component';
 import { BindemployeeComponent } from './modal/bindemployee/bindemployee.component';
 import { AddbatchemployeeComponent } from './modal/addbatchemployee/addbatchemployee.component';
+import {
+  NgMaterialMultilevelMenuModule,
+  ɵb,
+} from "ng-material-multilevel-menu";
 
 
 export function tokenGetter() {
@@ -95,6 +99,7 @@ export function tokenGetter() {
     AdminService,
     ImageService,
     ClientService,
+    ɵb,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

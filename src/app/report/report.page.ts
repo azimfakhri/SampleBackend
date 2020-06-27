@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
 import { ModalController, NavController, LoadingController } from '@ionic/angular';
 import { ClientService } from '../services/client.service';
@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { MatAccordion } from '@angular/material';
 
 @Component({
   selector: 'app-report',
@@ -17,6 +18,8 @@ export class ReportPage implements OnInit {
   p: number = 1;
   searchForm:any;
   searchResults:any =[];
+  equipmentList:any = [];
+  isOpen:boolean = false;
   constructor(
     private modalCtrl:ModalController,
     private navCtrl : NavController,
@@ -28,6 +31,7 @@ export class ReportPage implements OnInit {
 
   ngOnInit() {
     this.SetForm();
+    this.getEquipment();
   }
 
   SetForm(){
@@ -49,37 +53,63 @@ export class ReportPage implements OnInit {
       ],
       'order':[
         'ASC'
-      ]
+      ],
+      'selectedEquipment':[
+        '',[Validators.required]
+      ],
     })
   }
 
-  async search(){
+  async getEquipment(){
     let loader = await this.loading.create({
       message:'Please wait.'
     });
     
     loader.present();
 
-    let form = this.searchForm.value;
-
-    let data = {
-      name: form.name ? form.name:'',
-      empNo:form.empNo? form.empNo:'',
-      nric:form.nric? form.nric:'',
-      from:form.from? moment(form.from).startOf('day').format('YYYY-MM-DD HH:mm'):'',
-      to:form.to? moment(form.to).endOf('day').format('YYYY-MM-DD HH:mm'):'',
-      order: form.order? form.order: 'ASC',
-      page:this.p
-    }
-      
-    const res = await this.clientservice.getAccessByEquipment('3ada9d841bf84d26b76dfbe0ff66b216',data);
-
+    const res = await this.clientservice.getEquipments();
     if(res['code'] == 0){
-      this.searchResults = res['data'];
+      this.equipmentList =  res['data'];
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
     }
+
     loader.dismiss();
+  }
+
+  async search(){
+    if(this.searchForm.valid){
+      let loader = await this.loading.create({
+        message:'Please wait.'
+      });
+      
+      loader.present();
+  
+      let form = this.searchForm.value;
+  
+      let data = {
+        name: form.name ? form.name:'',
+        empNo:form.empNo? form.empNo:'',
+        nric:form.nric? form.nric:'',
+        from:form.from? moment(form.from).startOf('day').format('YYYY-MM-DD HH:mm'):'',
+        to:form.to? moment(form.to).endOf('day').format('YYYY-MM-DD HH:mm'):'',
+        order: form.order? form.order: 'ASC',
+        page:this.p
+      }
+        
+      const res = await this.clientservice.getAccessByEquipment(form.selectedEquipment,data);
+  
+      if(res['code'] == 0){
+        this.searchResults = res['data'];
+        this.isOpen = false;
+      }else{
+        this.notification.errorNotification(res['code'],res['msg']);
+      }
+      loader.dismiss();
+    }else{
+      this.notification.alertNotification(config.message.alert.Warning,config.message.alert.MandatoryField)
+    }
+    
   }
 
   changePage(event){

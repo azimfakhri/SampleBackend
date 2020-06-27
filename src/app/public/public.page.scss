@@ -1,0 +1,23 @@
+.main{
+    --ion-background-color: #AFEEEE;
+}
+.p1{
+    background-color: #FFF !important;
+    margin:8vh 5vw;
+    padding:35px;
+    border-width:15px;
+    height:84%;
+    width:90%;
+}
+
+@media only screen and (max-width:768px) { 
+	.p1{
+        
+        padding:15px;
+    }
+}
+
+
+.btnsr{
+    margin:15px;
+}

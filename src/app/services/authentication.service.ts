@@ -12,7 +12,7 @@ import { NotificationService } from './notification.service';
 })
 export class AuthenticationService {
 
-  disabledRedirectFor: string[] = [];
+  disabledRedirectFor: string[] = ['not_found','public'];
 
   authState = new BehaviorSubject(false);
   URL_API : string = environment.API;

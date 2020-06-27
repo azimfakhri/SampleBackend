@@ -64,7 +64,12 @@ export class SidenavComponent implements OnInit {
             icon: 'swap_horiz'
           }
         ]
-      }
+      },
+      {
+        label: 'Report',
+        icon: 'assessment',
+        link: 'report'
+      },
       
     ];
 

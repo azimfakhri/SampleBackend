@@ -1,6 +1,7 @@
 export let message ={
     alert:{
         "Warning" : "Warning",
+        "Info" : "Info",
         "MandatoryField" : "Please fill in all mandatory field(s).",
         "PasswordNotMatch" : "Password not matched.",
         "DelTitle":"Delete",
@@ -11,7 +12,11 @@ export let message ={
         "SuccessMsgDelete":"Record successfully deleted",
         "SuccessMsgPassword":"Password changed",
         "SelectionWarning" : "Please select at least one choice",
-        "UploadBatchWarning" : "File is empty"
+        "UploadBatchWarning" : "File is empty/Incorrect format",
+        "UploadTrue":"Image already uploaded",
+        "UploadSuccess":"Image successfully uploaded",
+        "UploadError":"Unable to upload. Try again.",
+        "FileEmpty":"Please select image to upload"
         
     },
     error:{
