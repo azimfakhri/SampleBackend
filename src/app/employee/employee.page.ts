@@ -84,26 +84,31 @@ export class EmployeePage implements OnInit {
       if(res['code'] == 0){
         this.employeeList =  res['data'][0].employees;
         this.filteredList = [];
-        this.employeeList.forEach(async element => {
-          if(element.img){
-            const url = await this.imgservice.getImageFromLink(element.img);
-            this.filteredList.push({
-              empNo:element.empNo,
-              employeeId:element.employeeId,
-              img:url.url,
-              name:element.name
-            })
-          }else{
-            this.filteredList.push({
-              empNo:element.empNo,
-              employeeId:element.employeeId,
-              img:null,
-              name:element.name
-            })
-          }
-          
-        });
-        loader.dismiss();
+        if(this.employeeList.length > 0){
+          this.employeeList.forEach(async element => {
+            if(element.img){
+              const url = await this.imgservice.getImageFromLink(element.img);
+              this.filteredList.push({
+                empNo:element.empNo,
+                employeeId:element.employeeId,
+                img:url.url,
+                name:element.name
+              })
+              loader.dismiss();
+            }else{
+              this.filteredList.push({
+                empNo:element.empNo,
+                employeeId:element.employeeId,
+                img:null,
+                name:element.name
+              })
+              loader.dismiss();
+            }
+          });
+        }else{
+          loader.dismiss();
+        }
+        
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
         loader.dismiss();

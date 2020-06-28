@@ -71,12 +71,17 @@
 
   <ion-grid style="margin-top:20px;">
     <ion-row>
+      <ion-col size="2"></ion-col>
       <ion-col>Name</ion-col>
       <ion-col>Employee No</ion-col>
       <ion-col>Access Time</ion-col>
       <ion-col>Temperature</ion-col>
     </ion-row>
-    <ion-row *ngFor="let item of searchResults | paginate: { itemsPerPage: 100, currentPage: p }">
+    <ion-row *ngFor="let item of formattedList | paginate: { itemsPerPage: 100, currentPage: p }">
+      <ion-col size="2">
+        <img matListAvatar *ngIf="item.img" [src]="item.img" height="100">
+        <div matListAvatar *ngIf="!item.img"><mat-icon class="fallbackicon">perm_identity</mat-icon></div>
+      </ion-col>
       <ion-col>
         <div>{{item.name}}</div>
       </ion-col>

@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { MatAccordion } from '@angular/material';
+import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-report',
@@ -18,6 +19,7 @@ export class ReportPage implements OnInit {
   p: number = 1;
   searchForm:any;
   searchResults:any =[];
+  formattedList:any =[];
   equipmentList:any = [];
   isOpen:boolean = false;
   constructor(
@@ -26,7 +28,8 @@ export class ReportPage implements OnInit {
     private clientservice: ClientService,
     private notification:NotificationService,
     private loading: LoadingController,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private imageservice:ImageService
   ) { }
 
   ngOnInit() {
@@ -101,11 +104,43 @@ export class ReportPage implements OnInit {
   
       if(res['code'] == 0){
         this.searchResults = res['data'];
+
+        if(this.searchResults.length>0){
+          this.searchResults.forEach(async element => {
+            if(element.img){
+              const url = await this.imageservice.getImageFromLink(element.img);
+              this.formattedList.push({
+                name: element.name,
+                accessTime: element.accessTime,
+                temperature: element.temperature,
+                employeeNo: element.employeeNo,
+                nric: element.nric,
+                img: url.url
+              });
+              loader.dismiss();
+
+            }else{
+              this.formattedList.push({
+                name: element.name,
+                accessTime: element.accessTime,
+                temperature: element.temperature,
+                employeeNo: element.employeeNo,
+                nric: element.nric,
+                img: null
+              });
+              loader.dismiss();
+            }
+          });
+        }else{
+          loader.dismiss();
+        }
+
         this.isOpen = false;
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
+        loader.dismiss();
       }
-      loader.dismiss();
+      
     }else{
       this.notification.alertNotification(config.message.alert.Warning,config.message.alert.MandatoryField)
     }
