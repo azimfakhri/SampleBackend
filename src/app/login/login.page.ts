@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { environment } from 'src/environments/environment'; 
-import CryptoJS from 'crypto-js';
 import { AuthenticationService }from 'src/app/services/authentication.service'
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({

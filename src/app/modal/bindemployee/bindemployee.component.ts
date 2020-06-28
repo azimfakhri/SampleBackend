@@ -24,7 +24,6 @@ export class BindemployeeComponent implements OnInit {
 
   ngOnInit() {
     this.department = this.navParams.get('department');
-    console.log(this.department);
 
     this.getAllEmployee();
   }

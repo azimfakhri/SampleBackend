@@ -21,7 +21,7 @@ export class ViewupdateEmployeeComponent implements OnInit {
   employeeid:any;
   employee:any;
   editable:boolean = false;
-  imageURL:any;
+  imageURL:string = null;
   constructor( private modalCtrl:ModalController,
     public builder : FormBuilder,
     public navParams: NavParams,
@@ -76,8 +76,13 @@ export class ViewupdateEmployeeComponent implements OnInit {
     const res = await this.clientservice.getEmployee(this.employeeid);
     if(res['code'] == 0){
       this.employee =  res['data'][0];
-      const url = await this.imgservice.getImageFromLink(this.employee.img);
-      this.imageURL = url.url;
+      
+      if(this.employee.img){
+        const url = await this.imgservice.getImageFromLink(this.employee.img);
+        this.imageURL = url.url;
+      }
+
+     
       this.employeeForm.patchValue(this.employee);
     }else{
       this.notification.errorNotification(res['code'],res['msg']);

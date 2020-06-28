@@ -47,15 +47,27 @@ export class EmployeePage implements OnInit {
         this.employeeList =  res['data'];
         this.filteredList = [];
         this.employeeList.forEach(async element => {
-          const url = await this.imgservice.getImageFromLink(element.img);
-          this.filteredList.push({
-            departmentId:element.departmentId,
-            departmentName:element.departmentName,
-            empNo:element.empNo,
-            employeeId:element.employeeId,
-            img:url.url,
-            name:element.name
-          })
+          if(element.img){
+            const url = await this.imgservice.getImageFromLink(element.img);
+            this.filteredList.push({
+              departmentId:element.departmentId,
+              departmentName:element.departmentName,
+              empNo:element.empNo,
+              employeeId:element.employeeId,
+              img:url.url,
+              name:element.name
+            });
+          }else{
+            this.filteredList.push({
+              departmentId:element.departmentId,
+              departmentName:element.departmentName,
+              empNo:element.empNo,
+              employeeId:element.employeeId,
+              img:null,
+              name:element.name
+            })
+          }
+          
         });
         loader.dismiss();
       }else{
@@ -66,7 +78,6 @@ export class EmployeePage implements OnInit {
       var array = this.departmentList;
 
       var temp = array.find(x => x.departmentId == this.selectedDepartment);
-      console.log(temp);
       this.selectedDepartmentName = temp.departmentName;
 
       const res = await this.clientservice.getEmployeesByDepartment(this.selectedDepartment);
@@ -74,13 +85,23 @@ export class EmployeePage implements OnInit {
         this.employeeList =  res['data'][0].employees;
         this.filteredList = [];
         this.employeeList.forEach(async element => {
-          const url = await this.imgservice.getImageFromLink(element.img);
-          this.filteredList.push({
-            empNo:element.empNo,
-            employeeId:element.employeeId,
-            img:url.url,
-            name:element.name
-          })
+          if(element.img){
+            const url = await this.imgservice.getImageFromLink(element.img);
+            this.filteredList.push({
+              empNo:element.empNo,
+              employeeId:element.employeeId,
+              img:url.url,
+              name:element.name
+            })
+          }else{
+            this.filteredList.push({
+              empNo:element.empNo,
+              employeeId:element.employeeId,
+              img:null,
+              name:element.name
+            })
+          }
+          
         });
         loader.dismiss();
       }else{

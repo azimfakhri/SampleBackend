@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   WelcomeMessage: 'Welcome to MTS dev env',
   API: 'http://54.254.171.66:3000/v1',
-  
+  Public:'http://54.254.171.66/public?com='
 };
 
 /*

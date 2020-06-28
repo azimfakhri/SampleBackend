@@ -33,7 +33,8 @@
     <mat-list>
       <mat-list-item *ngFor="let emp of filteredList">
         <mat-divider></mat-divider>
-        <img matListAvatar [src]="emp.img">
+        <img matListAvatar *ngIf="emp.img" [src]="emp.img">
+        <div matListAvatar *ngIf="!emp.img"><mat-icon class="fallbackicon">perm_identity</mat-icon></div>
         <div mat-line>Name: {{emp.name}}</div>
         <div mat-line>Employee No: {{emp.empNo}}</div>
         <div mat-line>Department: {{emp.departmentName ? emp.departmentName : selectedDepartmentName }}</div>

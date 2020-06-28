@@ -23,7 +23,6 @@ export class EditdepartmentComponent implements OnInit {
   ngOnInit() {
     this.department = this.navParams.get('department');
     this.name = this.department.departmentName;
-    console.log(this.department);
   }
 
   close(){

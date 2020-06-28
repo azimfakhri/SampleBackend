@@ -23,10 +23,7 @@ export class ImageService {
 
   async getImageFromLink(url) {
    return await fetch(url + '?token=' + sessionStorage.getItem('user-token'),{
-    method: 'GET',
-    // headers: {
-    //   'Authorization': 'Bearer ' + sessionStorage.getItem('user-token'),
-    // }
+    method: 'GET'
    });
   }
 }

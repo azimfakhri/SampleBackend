@@ -42,13 +42,21 @@ export class CompaniesPage implements OnInit {
       this.companieslist =  res['data'];
       this.formattedlist = [];
       this.companieslist.forEach(async element => {
-        const url = await this.imgservice.getImageFromLink(element.logo);
-        this.formattedlist.push({
-          companyId:element.companyId,
-          name:element.name,
-          logo: url.url
-        })
-        console.log(this.formattedlist);
+        if(element.logo){
+          const url = await this.imgservice.getImageFromLink(element.logo);
+          this.formattedlist.push({
+            companyId:element.companyId,
+            name:element.name,
+            logo: url.url
+          })
+        }else{
+          this.formattedlist.push({
+            companyId:element.companyId,
+            name:element.name,
+            logo: null
+          })
+        }
+        
       });
       loader.dismiss();
     }else{

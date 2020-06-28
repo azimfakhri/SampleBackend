@@ -64,15 +64,13 @@ export class AppComponent {
       
     });
 
-    keepalive.interval(10);
+    keepalive.interval(15);
 
     keepalive.onPing.subscribe(() => {
       this.lastPing = new Date();
-      console.log('interval 10')
+      console.log('interval 15')
       if(this.CheckLoggedIn()){
-        console.log('interval:true')
       }else{
-        console.log('interval:false')
         const res = this.refreshToken();
 
         console.log(res);

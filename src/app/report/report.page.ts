@@ -113,7 +113,6 @@ export class ReportPage implements OnInit {
   }
 
   changePage(event){
-    console.log(event);
     this.search();
   }
 

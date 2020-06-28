@@ -11,7 +11,8 @@
   <mat-list>
     <mat-list-item *ngFor="let com of formattedlist">
       <mat-divider></mat-divider>
-      <img matListAvatar [src]="com.logo">
+      <img matListAvatar *ngIf="com.logo" [src]="com.logo">
+      <div matListAvatar *ngIf="!com.logo"><mat-icon class="fallbackicon">perm_identity</mat-icon></div>
       <div mat-line>{{com.name}}</div>
       <button mat-icon-button color="warning" (click)="ListEquipment(com)" aria-label="List Equipment">
         <mat-icon>devices</mat-icon>

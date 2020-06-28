@@ -29,7 +29,6 @@ export class PublicPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.companyid = params['com'];
-      console.log(this.companyid);
   });
   }
 
@@ -44,7 +43,6 @@ export class PublicPage implements OnInit {
 
     if(res['code'] == 0){
       this.result = res['data'][0];
-      console.log(this.result);
       this.name = this.result.name;
       if(this.result.imgUploaded){
         this.notification.alertNotification(config.message.alert.Info,config.message.alert.UploadTrue);
