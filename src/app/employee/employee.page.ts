@@ -6,6 +6,7 @@ import { AddemployeeComponent } from '../modal/addemployee/addemployee.component
 import * as config from '../config'
 import { ViewupdateEmployeeComponent } from '../modal/viewupdate-employee/viewupdate-employee.component';
 import { AddbatchemployeeComponent } from '../modal/addbatchemployee/addbatchemployee.component';
+import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-employee',
@@ -25,7 +26,9 @@ export class EmployeePage implements OnInit {
     private navCtrl : NavController,
     private clientservice: ClientService,
     private notification:NotificationService,
-    private loading: LoadingController) { }
+    private loading: LoadingController,
+    private imgservice:ImageService
+    ) { }
 
   ngOnInit() {
     this.getDepartment();
@@ -42,9 +45,22 @@ export class EmployeePage implements OnInit {
       const res = await this.clientservice.getAllEmployees();
       if(res['code'] == 0){
         this.employeeList =  res['data'];
-        this.filteredList = this.employeeList;
+        this.filteredList = [];
+        this.employeeList.forEach(async element => {
+          const url = await this.imgservice.getImageFromLink(element.img);
+          this.filteredList.push({
+            departmentId:element.departmentId,
+            departmentName:element.departmentName,
+            empNo:element.empNo,
+            employeeId:element.employeeId,
+            img:url.url,
+            name:element.name
+          })
+        });
+        loader.dismiss();
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
+        loader.dismiss();
       }
     }else{
       var array = this.departmentList;
@@ -56,14 +72,22 @@ export class EmployeePage implements OnInit {
       const res = await this.clientservice.getEmployeesByDepartment(this.selectedDepartment);
       if(res['code'] == 0){
         this.employeeList =  res['data'][0].employees;
-        this.filteredList = this.employeeList;
+        this.filteredList = [];
+        this.employeeList.forEach(async element => {
+          const url = await this.imgservice.getImageFromLink(element.img);
+          this.filteredList.push({
+            empNo:element.empNo,
+            employeeId:element.employeeId,
+            img:url.url,
+            name:element.name
+          })
+        });
+        loader.dismiss();
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
+        loader.dismiss();
       }
     }
-
-    
-    loader.dismiss();
   }
 
   async getDepartment(){

@@ -9,8 +9,8 @@ export class PublicService {
   URL_API : string = environment.API;
   constructor(private http: HttpClient) { }
 
-  async getdetails(nric){
-    const res = await this.http.get(this.URL_API + '/public/getEmployee/' + nric, { responseType: 'json'}).toPromise()
+  async getdetails(comid,nric){
+    const res = await this.http.get(this.URL_API + '/public/getEmployee/'+ comid + '/' + nric, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 
@@ -18,7 +18,7 @@ export class PublicService {
   }
 
   async uploadimg(id,data){
-    const res = await this.http.post(this.URL_API + '/uploadImg/'+id,data, { responseType: 'json'}).toPromise()
+    const res = await this.http.post(this.URL_API + '/public/uploadImg/'+id,data, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);
     });
 

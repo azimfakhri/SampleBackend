@@ -20,9 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
         if (req.url.indexOf('public') !== -1) {
             return next.handle(req);
         }
-        if (req.url.indexOf('uploadImg') !== -1) {
-            return next.handle(req);
-        }
 
         const accessExpired = !this.authservice.isAuthenticated();
 

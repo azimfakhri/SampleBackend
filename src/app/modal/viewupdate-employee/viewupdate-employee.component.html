@@ -13,6 +13,9 @@
     <form [formGroup]="employeeForm">
       <ion-grid>
         <ion-row>
+          <img [src]="imageURL" height="150">
+        </ion-row>
+        <ion-row>
           <ion-col>
             <div>Full Name</div>
             <ion-input formControlName="name" class="input-style" [disabled]="!editable"></ion-input>

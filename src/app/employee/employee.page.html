@@ -33,7 +33,7 @@
     <mat-list>
       <mat-list-item *ngFor="let emp of filteredList">
         <mat-divider></mat-divider>
-        <img matListAvatar>
+        <img matListAvatar [src]="emp.img">
         <div mat-line>Name: {{emp.name}}</div>
         <div mat-line>Employee No: {{emp.empNo}}</div>
         <div mat-line>Department: {{emp.departmentName ? emp.departmentName : selectedDepartmentName }}</div>

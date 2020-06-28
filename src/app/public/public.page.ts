@@ -3,6 +3,7 @@ import { NotificationService } from '../services/notification.service';
 import { LoadingController } from '@ionic/angular';
 import { PublicService } from '../services/public.service';
 import * as config from '../config';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-public',
@@ -16,13 +17,20 @@ export class PublicPage implements OnInit {
   needupload:boolean = false;
   fileData: File = null;
   previewUrl:any = null;
+
+  companyid:string;
   constructor(
     private notification:NotificationService,
     private loading: LoadingController,
-    private publicservice:PublicService
+    private publicservice:PublicService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.companyid = params['com'];
+      console.log(this.companyid);
+  });
   }
 
   async search(){
@@ -32,12 +40,12 @@ export class PublicPage implements OnInit {
     
     loader.present();
       
-    const res = await this.publicservice.getdetails(this.nric);
+    const res = await this.publicservice.getdetails(this.companyid,this.nric);
 
     if(res['code'] == 0){
       this.result = res['data'][0];
       console.log(this.result);
-
+      this.name = this.result.name;
       if(this.result.imgUploaded){
         this.notification.alertNotification(config.message.alert.Info,config.message.alert.UploadTrue);
         this.needupload = false;

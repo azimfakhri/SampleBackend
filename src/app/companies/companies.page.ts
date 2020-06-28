@@ -40,20 +40,22 @@ export class CompaniesPage implements OnInit {
     const res = await this.adminservice.GetCompanyList();
     if(res['code'] == 0){
       this.companieslist =  res['data'];
-
-      this.companieslist.forEach(element => {
-        console.log(element);
+      this.formattedlist = [];
+      this.companieslist.forEach(async element => {
+        const url = await this.imgservice.getImageFromLink(element.logo);
         this.formattedlist.push({
           companyId:element.companyId,
           name:element.name,
-          logo:this.GetImage(element.logo)
+          logo: url.url
         })
+        console.log(this.formattedlist);
       });
-      console.log(this.formattedlist);
+      loader.dismiss();
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
+      loader.dismiss();
     }
-    loader.dismiss();
+    
   }
 
   ListEquipment(com){
@@ -90,30 +92,7 @@ export class CompaniesPage implements OnInit {
     return await modal.present();
   }
 
-  GetImage(link){
-    this.imgservice.getImage(link,'test').then(function(file) {
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-       return reader.result ;
-      }
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  createImageFromBlob(image: Blob) {
-    console.log(image);
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-       this.testblob =  reader.result;
-       console.log(this.testblob);
-    }, false);
- 
-    if (image) {
-       reader.readAsDataURL(image);
-    }
-   }
+  
 
   
 

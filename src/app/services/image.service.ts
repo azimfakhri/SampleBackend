@@ -8,16 +8,25 @@ import { Observable } from 'rxjs';
 export class ImageService {
   constructor(private http: HttpClient) { }
 
-  async getImage(url, fileName) {
-   return await fetch(url,{
+  // async GetImage(link){
+  //   return await this.getImageFromLink(link).then(function(blob) {
+  //     var reader = new FileReader();
+  //     //reader.readAsDataURL(blob);
+  //     reader.onloadend = () => {
+  //       console.log(reader.result)
+  //       return reader.result ;
+  //     }
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
+
+  async getImageFromLink(url) {
+   return await fetch(url + '?token=' + sessionStorage.getItem('user-token'),{
     method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + sessionStorage.getItem('user-token'),
-    }
-   }).then(r => r.blob())
-   .then((blob) => { 
-         console.log(blob); 
-       return new File([blob], fileName+'.'+   blob.type.split('/')[1]) ;
+    // headers: {
+    //   'Authorization': 'Bearer ' + sessionStorage.getItem('user-token'),
+    // }
    });
-}
+  }
 }
