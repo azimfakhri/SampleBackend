@@ -104,33 +104,22 @@ export class ReportPage implements OnInit {
   
       if(res['code'] == 0){
         this.searchResults = res['data'];
-
+        this.formattedList = [];
         if(this.searchResults.length>0){
-          this.searchResults.forEach(async element => {
-            if(element.img){
-              const url = await this.imageservice.getImageFromLink(element.img);
-              this.formattedList.push({
-                name: element.name,
-                accessTime: element.accessTime,
-                temperature: element.temperature,
-                employeeNo: element.employeeNo,
-                nric: element.nric,
-                img: url.url
-              });
-              loader.dismiss();
-
-            }else{
-              this.formattedList.push({
-                name: element.name,
-                accessTime: element.accessTime,
-                temperature: element.temperature,
-                employeeNo: element.employeeNo,
-                nric: element.nric,
-                img: null
-              });
-              loader.dismiss();
-            }
-          });
+          for (let index = 0; index < this.searchResults.length; index++) {
+            const element = this.searchResults[index];
+            
+            const url = await this.imageservice.getImageFromLink(element.img);
+            this.formattedList.push({
+              name: element.name,
+              accessTime: element.accessTime,
+              temperature: element.temperature,
+              employeeNo: element.employeeNo,
+              nric: element.nric,
+              img: url.url
+            });
+            loader.dismiss();
+          }
         }else{
           loader.dismiss();
         }

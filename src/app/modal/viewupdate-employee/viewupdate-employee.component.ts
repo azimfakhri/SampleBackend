@@ -55,7 +55,7 @@ export class ViewupdateEmployeeComponent implements OnInit {
         '',[Validators.required]
       ],
       'nric':[
-        ''
+        '',[Validators.required]
       ],
       'empNo':[
         ''
@@ -137,12 +137,30 @@ export class ViewupdateEmployeeComponent implements OnInit {
 
       if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgUpdate);
-       this.modalCtrl.dismiss();
+       this.modalCtrl.dismiss(true);
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
       }
       loader.dismiss();
     }
     
+  }
+  
+  async DeleteImage(){
+    var res = await this.notification.DeleteConfirmation(config.message.alert.DelTitle,config.message.alert.DelImgMsg);
+    res.present();
+
+    res.onDidDismiss()
+    .then(async (val) => {
+      if(val.role == "delete"){
+        const res = await this.clientservice.deleteEmployeeImage(this.employeeid);
+        if(res['code'] == 0){
+          this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
+          this.imageURL = null;
+        }else{
+           this.notification.errorNotification(res['code'],res['msg']);
+        }
+      }
+    });
   }
 }

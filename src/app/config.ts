@@ -6,6 +6,7 @@ export let message ={
         "PasswordNotMatch" : "Password not matched.",
         "DelTitle":"Delete",
         "DelMsg":"Are you sure want to delete this record?",
+        "DelImgMsg":"Are you sure want to delete this image?",
         "Success":"Success",
         "SuccessMsg":"Record successfully added",
         "SuccessMsgUpdate":"Record successfully updated",

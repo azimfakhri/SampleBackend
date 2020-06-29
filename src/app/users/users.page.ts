@@ -71,7 +71,10 @@ export class UsersPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.GetUsers();
+      if(res['data']){
+        this.GetUsers();
+      }
+      
     });
     return await modal.present();
   }

@@ -43,9 +43,10 @@ export class BindequipmentComponent implements OnInit {
     if(res['code'] == 0){
       this.departmentList =  res['data'];
       if(this.equipment.departments.length>0){
-        this.equipment.departments.forEach(element => {
+        for (let index = 0; index < this.equipment.departments.length; index++) {
+          const element = this.equipment.departments[index];
           this.selectedDepartment.push(element.departmentId);
-        });
+        }
       }
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
@@ -70,7 +71,7 @@ export class BindequipmentComponent implements OnInit {
   
         if(res['code'] == 0){
          this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
-         this.modalCtrl.dismiss();
+         this.modalCtrl.dismiss(true);
         }else{
           this.notification.errorNotification(res['code'],res['msg']);
         }

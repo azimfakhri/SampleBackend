@@ -41,7 +41,9 @@ export class CompaniesPage implements OnInit {
     if(res['code'] == 0){
       this.companieslist =  res['data'];
       this.formattedlist = [];
-      this.companieslist.forEach(async element => {
+      for (let index = 0; index < this.companieslist.length; index++) {
+        const element = this.companieslist[index];
+        
         if(element.logo){
           const url = await this.imgservice.getImageFromLink(element.logo);
           this.formattedlist.push({
@@ -56,8 +58,7 @@ export class CompaniesPage implements OnInit {
             logo: null
           })
         }
-        
-      });
+      }
       loader.dismiss();
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
@@ -94,7 +95,10 @@ export class CompaniesPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getCompany();
+      if(res['data']){
+        this.getCompany();
+      }
+      
      
     });
     return await modal.present();

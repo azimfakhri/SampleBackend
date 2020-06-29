@@ -46,7 +46,9 @@ export class EmployeePage implements OnInit {
       if(res['code'] == 0){
         this.employeeList =  res['data'];
         this.filteredList = [];
-        this.employeeList.forEach(async element => {
+        for (let index = 0; index < this.employeeList.length; index++) {
+          const element = this.employeeList[index];
+          
           if(element.img){
             const url = await this.imgservice.getImageFromLink(element.img);
             this.filteredList.push({
@@ -57,6 +59,7 @@ export class EmployeePage implements OnInit {
               img:url.url,
               name:element.name
             });
+            loader.dismiss();
           }else{
             this.filteredList.push({
               departmentId:element.departmentId,
@@ -65,11 +68,10 @@ export class EmployeePage implements OnInit {
               employeeId:element.employeeId,
               img:null,
               name:element.name
-            })
+            });
+            loader.dismiss();
           }
-          
-        });
-        loader.dismiss();
+        }
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
         loader.dismiss();
@@ -85,7 +87,9 @@ export class EmployeePage implements OnInit {
         this.employeeList =  res['data'][0].employees;
         this.filteredList = [];
         if(this.employeeList.length > 0){
-          this.employeeList.forEach(async element => {
+          for (let index = 0; index < this.employeeList.length; index++) {
+            const element = this.employeeList[index];
+            
             if(element.img){
               const url = await this.imgservice.getImageFromLink(element.img);
               this.filteredList.push({
@@ -104,7 +108,7 @@ export class EmployeePage implements OnInit {
               })
               loader.dismiss();
             }
-          });
+          }
         }else{
           loader.dismiss();
         }
@@ -146,7 +150,10 @@ export class EmployeePage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getDepartment();
+      if(res['data']){
+        this.getDepartment();
+      }
+      
      
     });
     return await modal.present();
@@ -160,7 +167,10 @@ export class EmployeePage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getDepartment();
+      if(res['data']){
+        this.getDepartment();
+      }
+      
      
     });
     return await modal.present();
@@ -192,7 +202,6 @@ export class EmployeePage implements OnInit {
     modal.onDidDismiss()
     .then((res) => {
       this.getDepartment();
-     
     });
     return await modal.present();
   }

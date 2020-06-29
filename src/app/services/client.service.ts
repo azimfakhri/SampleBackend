@@ -89,6 +89,14 @@ export class ClientService {
     return res;
   }
 
+  async deleteEmployeeImage(id){
+    const res = await this.http.post(this.URL_API + '/manage/deleteEmployeeImage/' + id, { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async addEmployeesByBatch(id,data){
     const res = await this.http.post(this.URL_API + '/manage/addEmployeesByBatch/' + id,data, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);

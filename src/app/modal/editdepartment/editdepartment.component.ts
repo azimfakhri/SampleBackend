@@ -44,7 +44,7 @@ export class EditdepartmentComponent implements OnInit {
 
       if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgUpdate);
-       this.modalCtrl.dismiss();
+       this.modalCtrl.dismiss(true);
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
       }

@@ -82,6 +82,7 @@ export class SidenavComponent implements OnInit {
 
 
   selectedItem(event){
+    console.log(event);
   }
 
   

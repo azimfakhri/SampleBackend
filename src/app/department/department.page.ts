@@ -52,7 +52,10 @@ export class DepartmentPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getDepartment();
+      if(res['data']){
+        this.getDepartment();
+      }
+      
      
     });
     return await modal.present();
@@ -69,7 +72,10 @@ export class DepartmentPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getDepartment();
+      if(res['data']){
+        this.getDepartment();
+      }
+      
      
     });
     return await modal.present();
@@ -86,7 +92,10 @@ export class DepartmentPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.getDepartment();
+      if(res['data']){
+        this.getDepartment();
+      }
+      
      
     });
     return await modal.present();

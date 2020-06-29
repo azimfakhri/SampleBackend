@@ -49,7 +49,7 @@ export class AddemployeeComponent implements OnInit {
         '',[Validators.required]
       ],
       'nric':[
-        ''
+        '',[Validators.required]
       ],
       'empNo':[
         ''
@@ -126,7 +126,7 @@ export class AddemployeeComponent implements OnInit {
 
       if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsg);
-       this.modalCtrl.dismiss();
+       this.modalCtrl.dismiss(true);
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
       }

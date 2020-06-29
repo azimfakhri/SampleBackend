@@ -108,7 +108,10 @@ export class EquipmentPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.GetEquipment();
+      if(res['data']){
+        this.GetEquipment();
+      }
+      
     });
     return await modal.present();
   }
@@ -124,7 +127,10 @@ export class EquipmentPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      this.GetEquipment();
+      if(res['data']){
+        this.GetEquipment();
+      }
+      
     });
     return await modal.present();
   }

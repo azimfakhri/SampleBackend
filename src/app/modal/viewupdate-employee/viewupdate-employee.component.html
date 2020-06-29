@@ -13,7 +13,13 @@
     <form [formGroup]="employeeForm">
       <ion-grid>
         <ion-row>
-          <img *ngIf="imageURL" [src]="imageURL" height="150">
+          <ion-col size="3">
+            <img *ngIf="imageURL" [src]="imageURL" height="150">
+            <div *ngIf="!imageURL"><mat-icon class="fallbackicon biggericon">perm_identity</mat-icon></div>
+          </ion-col>
+          <ion-col *ngIf="imageURL && editable">
+            <button mat-button color="accent" (click)="DeleteImage()">Remove image</button>
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
