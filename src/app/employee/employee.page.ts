@@ -46,32 +46,37 @@ export class EmployeePage implements OnInit {
       if(res['code'] == 0){
         this.employeeList =  res['data'];
         this.filteredList = [];
-        for (let index = 0; index < this.employeeList.length; index++) {
-          const element = this.employeeList[index];
-          
-          if(element.img){
-            const url = await this.imgservice.getImageFromLink(element.img);
-            this.filteredList.push({
-              departmentId:element.departmentId,
-              departmentName:element.departmentName,
-              empNo:element.empNo,
-              employeeId:element.employeeId,
-              img:url.url,
-              name:element.name
-            });
-            loader.dismiss();
-          }else{
-            this.filteredList.push({
-              departmentId:element.departmentId,
-              departmentName:element.departmentName,
-              empNo:element.empNo,
-              employeeId:element.employeeId,
-              img:null,
-              name:element.name
-            });
-            loader.dismiss();
+        if(this.employeeList.length > 0){
+          for (let index = 0; index < this.employeeList.length; index++) {
+            const element = this.employeeList[index];
+            
+            if(element.img){
+              const url = await this.imgservice.getImageFromLink(element.img);
+              this.filteredList.push({
+                departmentId:element.departmentId,
+                departmentName:element.departmentName,
+                empNo:element.empNo,
+                employeeId:element.employeeId,
+                img:url.url,
+                name:element.name
+              });
+              loader.dismiss();
+            }else{
+              this.filteredList.push({
+                departmentId:element.departmentId,
+                departmentName:element.departmentName,
+                empNo:element.empNo,
+                employeeId:element.employeeId,
+                img:null,
+                name:element.name
+              });
+              loader.dismiss();
+            }
           }
+        }else{
+          loader.dismiss();
         }
+        
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
         loader.dismiss();

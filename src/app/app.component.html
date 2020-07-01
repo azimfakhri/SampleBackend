@@ -32,8 +32,8 @@
     <mat-sidenav #sideNav [opened]="isLoggedin" mode="side">
       <app-sidenav *ngIf="isLoggedin"></app-sidenav>
     </mat-sidenav>
-    <mat-sidenav-content style="margin-bottom: 700px;">
-      <ion-router-outlet id="content1" class="pane-margin"></ion-router-outlet>
+    <mat-sidenav-content style="margin-bottom: 700px;" class="mtscontainer">
+      <ion-router-outlet id="content1" class="pane-margin" [ngClass]="{'rmarginleft': isLoggedin == true }"></ion-router-outlet>
       
     </mat-sidenav-content>
   </mat-sidenav-container>

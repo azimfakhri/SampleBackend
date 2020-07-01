@@ -197,3 +197,10 @@ ion-modal.auto-height {
 .fallbackicon{
     font-size:40px;
 }
+
+.mtscontainer{
+    position: static !important;
+    top:0;
+    width: 100%;
+    bottom: 0;
+}
