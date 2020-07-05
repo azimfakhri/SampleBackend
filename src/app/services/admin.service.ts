@@ -25,6 +25,15 @@ export class AdminService {
     return res;
   }
 
+  async DeleteCompany(id){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const res = await this.http.post(this.URL_API + '/admin/deleteCompany/'+ id, { headers, responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async GetEquipmentList(id){
     const res = await this.http.get(this.URL_API + '/admin/getEquipmentByCompany/' + id, { responseType: 'json'}).toPromise()
      .catch(err => { console.log(err);

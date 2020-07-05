@@ -6,7 +6,7 @@ import { NavigationExtras } from '@angular/router';
 import { AdminService } from '../services/admin.service';
 import { NotificationService } from '../services/notification.service';
 import { ImageService } from '../services/image.service';
-
+import * as config from '../config';
 
 @Component({
   selector: 'app-companies',
@@ -104,7 +104,23 @@ export class CompaniesPage implements OnInit {
     return await modal.present();
   }
 
-  
+  async DeleteCompany(com){
+    var res = await this.notification.DeleteConfirmation(config.message.alert.DelTitle,config.message.alert.DelMsg);
+    res.present();
+
+    res.onDidDismiss()
+    .then(async (val) => {
+      if(val.role == "delete"){
+        const res = await this.adminservice.DeleteCompany(com.companyId);
+        if(res['code'] == 0){
+          this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgDelete);
+          this.getCompany();
+        }else{
+           this.notification.errorNotification(res['code'],res['msg']);
+        }
+      }
+    });
+  }
 
   
 
