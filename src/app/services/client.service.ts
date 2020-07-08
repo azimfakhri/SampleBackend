@@ -129,8 +129,8 @@ export class ClientService {
     return res;
   }
 
-  async getAccessByEquipment(id,data){
-    const res = await this.http.get(this.URL_API + '/report/getAccessByEquipment/' + id, {
+  async getAccessByEquipment(data){
+    const res = await this.http.get(this.URL_API + '/report/getAccessRecord/', {
       params:data
     }).toPromise()
      .catch(err => { console.log(err);

@@ -7,6 +7,7 @@ import { AdminService } from '../services/admin.service';
 import { NotificationService } from '../services/notification.service';
 import { ImageService } from '../services/image.service';
 import * as config from '../config';
+import { UpdatecompanyComponent } from '../modal/updatecompany/updatecompany.component';
 
 @Component({
   selector: 'app-companies',
@@ -92,6 +93,26 @@ export class CompaniesPage implements OnInit {
       component: AddcompanyComponent,
       backdropDismiss:false,
       cssClass:'auto-height',
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      if(res['data']){
+        this.getCompany();
+      }
+      
+     
+    });
+    return await modal.present();
+  }
+
+  async UpdateCompany(com){
+    const modal = await this.modalCtrl.create({
+      component: UpdatecompanyComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps:{
+        company:com
+      }
     });
     modal.onDidDismiss()
     .then((res) => {

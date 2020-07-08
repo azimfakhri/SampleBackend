@@ -12,6 +12,7 @@ import { Keepalive } from '@ng-idle/keepalive';
 import { NotificationService } from './services/notification.service';
 import { ResetpasswordComponent } from './modal/resetpassword/resetpassword.component';
 import { ViewupdateprofileComponent } from './modal/viewupdateprofile/viewupdateprofile.component';
+import { UpdatecompanyComponent } from './modal/updatecompany/updatecompany.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent {
   idleState:string = 'Not started.';
   timedOut:boolean = false;
   lastPing?: Date = null;
+  isAdmin:boolean = true;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -113,6 +115,9 @@ export class AppComponent {
 
   getLoginID(){
     if(this.CheckLoggedIn()){
+      if(sessionStorage.getItem('usertype') == '2'){
+        this.isAdmin = false;
+      }
       return sessionStorage.getItem('userFullName');
     }
   }
@@ -140,6 +145,31 @@ export class AppComponent {
       component: ViewupdateprofileComponent,
       backdropDismiss:false,
       cssClass:'auto-height'
+    });
+    return await modal.present();
+  }
+
+  async EditCompany(){
+    let com = {
+      name: sessionStorage.getItem('companyName'),
+      logo:sessionStorage.getItem('companyLogo'),
+      companyId:sessionStorage.getItem('companyId')
+    }
+    const modal = await this.modalCtrl.create({
+      component: UpdatecompanyComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+      componentProps:{
+        company:com
+      }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      if(res['data']){
+        console.log(res);
+      }
+      
+     
     });
     return await modal.present();
   }

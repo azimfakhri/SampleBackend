@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },  {
+    path: 'report-employee',
+    loadChildren: () => import('./report-employee/report-employee.module').then( m => m.ReportEmployeePageModule)
   },
+
 
 
 

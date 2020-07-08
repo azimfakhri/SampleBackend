@@ -25,6 +25,14 @@ export class AdminService {
     return res;
   }
 
+  async UpdateCompany(id,data){
+    const res = await this.http.post(this.URL_API + '/account/updateCompany/'+id,data, { responseType: 'json'}).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
+
   async DeleteCompany(id){
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const res = await this.http.post(this.URL_API + '/admin/deleteCompany/'+ id, { headers, responseType: 'json'}).toPromise()

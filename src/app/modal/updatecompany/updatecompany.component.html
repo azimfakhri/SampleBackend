@@ -1,3 +1,35 @@
-<p>
-  updatecompany works!
-</p>
+<ion-header>
+  <ion-toolbar class="modalHeader">
+    <ion-title>
+      Company
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="inner-content">
+  <div class="form-padding">
+    <form [formGroup]="companyForm">
+      <div>Company Name</div>
+      <ion-input formControlName="companyName" class="input-style"></ion-input>
+
+      <div>Company Logo</div>
+            <input type="file" name="image" accept="image/*" (change)="fileProgress($event)" />
+            <div class="image-preview" *ngIf="previewUrl">
+              <img [src]="previewUrl" height="150" />                 
+            </div>
+    </form>
+  </div>
+</div>
+<ion-footer>
+  <ion-toolbar >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button class="proceed-btn-form" type="button" (click)="proceed()">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

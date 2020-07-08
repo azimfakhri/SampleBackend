@@ -58,7 +58,7 @@ export class ReportPage implements OnInit {
         'ASC'
       ],
       'selectedEquipment':[
-        '',[Validators.required]
+        ''
       ],
     })
   }
@@ -73,6 +73,10 @@ export class ReportPage implements OnInit {
     const res = await this.clientservice.getEquipments();
     if(res['code'] == 0){
       this.equipmentList =  res['data'];
+      this.equipmentList.unshift({
+        equipmentId:"",
+        name:"ALL"
+      });
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
     }
@@ -91,6 +95,8 @@ export class ReportPage implements OnInit {
       let form = this.searchForm.value;
   
       let data = {
+        equipmentId:form.selectedEquipment,
+        departmentId:'',
         name: form.name ? form.name:'',
         empNo:form.empNo? form.empNo:'',
         nric:form.nric? form.nric:'',
@@ -100,7 +106,7 @@ export class ReportPage implements OnInit {
         page:this.p
       }
         
-      const res = await this.clientservice.getAccessByEquipment(form.selectedEquipment,data);
+      const res = await this.clientservice.getAccessByEquipment(data);
   
       if(res['code'] == 0){
         this.searchResults = res['data'];
@@ -116,7 +122,9 @@ export class ReportPage implements OnInit {
               temperature: element.temperature,
               employeeNo: element.employeeNo,
               nric: element.nric,
-              img: url.url
+              img: url.url,
+              alert: parseFloat(element.temperature) > 37.5 ? true: false,
+              department: element.department
             });
             loader.dismiss();
           }

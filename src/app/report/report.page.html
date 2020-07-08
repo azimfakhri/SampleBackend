@@ -74,6 +74,7 @@
       <ion-col size="2"></ion-col>
       <ion-col>Name</ion-col>
       <ion-col>Employee No</ion-col>
+      <ion-col>Department</ion-col>
       <ion-col>Access Time</ion-col>
       <ion-col>Temperature</ion-col>
     </ion-row>
@@ -89,10 +90,13 @@
         <div>{{item.employeeNo}}</div>
       </ion-col>
       <ion-col>
+        <div>{{item.department}}</div>
+      </ion-col>
+      <ion-col>
         <div>{{item.accessTime}}</div>
       </ion-col>
       <ion-col>
-        <div>{{item.temperature}}</div>
+        <div [ngClass]="{'highlight': item.alert == true }">{{item.temperature}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>
