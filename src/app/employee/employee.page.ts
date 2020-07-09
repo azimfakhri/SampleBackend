@@ -7,6 +7,9 @@ import * as config from '../config'
 import { ViewupdateEmployeeComponent } from '../modal/viewupdate-employee/viewupdate-employee.component';
 import { AddbatchemployeeComponent } from '../modal/addbatchemployee/addbatchemployee.component';
 import { ImageService } from '../services/image.service';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-employee',
@@ -40,9 +43,11 @@ export class EmployeePage implements OnInit {
     });
     
     loader.present();
-
-    if(this.selectedDepartment == 'ALL'){
-      const res = await this.clientservice.getAllEmployees();
+    let data ={
+      departmentId:this.selectedDepartment,
+      detail:1
+    }
+    const res = await this.clientservice.getAllEmployees(data);
       if(res['code'] == 0){
         this.employeeList =  res['data'];
         this.filteredList = [];
@@ -81,48 +86,48 @@ export class EmployeePage implements OnInit {
         this.notification.errorNotification(res['code'],res['msg']);
         loader.dismiss();
       }
-    }else{
-      var array = this.departmentList;
+    // else{
+    //   var array = this.departmentList;
 
-      var temp = array.find(x => x.departmentId == this.selectedDepartment);
-      this.selectedDepartmentName = temp.departmentName;
+    //   var temp = array.find(x => x.departmentId == this.selectedDepartment);
+    //   this.selectedDepartmentName = temp.departmentName;
 
-      const res = await this.clientservice.getEmployeesByDepartment(this.selectedDepartment);
-      if(res['code'] == 0){
-        this.employeeList =  res['data'][0].employees;
-        this.filteredList = [];
-        if(this.employeeList.length > 0){
-          for (let index = 0; index < this.employeeList.length; index++) {
-            const element = this.employeeList[index];
+    //   const res = await this.clientservice.getEmployeesByDepartment(this.selectedDepartment);
+    //   if(res['code'] == 0){
+    //     this.employeeList =  res['data'][0].employees;
+    //     this.filteredList = [];
+    //     if(this.employeeList.length > 0){
+    //       for (let index = 0; index < this.employeeList.length; index++) {
+    //         const element = this.employeeList[index];
             
-            if(element.img){
-              const url = await this.imgservice.getImageFromLink(element.img);
-              this.filteredList.push({
-                empNo:element.empNo,
-                employeeId:element.employeeId,
-                img:url.url,
-                name:element.name
-              })
-              loader.dismiss();
-            }else{
-              this.filteredList.push({
-                empNo:element.empNo,
-                employeeId:element.employeeId,
-                img:null,
-                name:element.name
-              })
-              loader.dismiss();
-            }
-          }
-        }else{
-          loader.dismiss();
-        }
+    //         if(element.img){
+    //           const url = await this.imgservice.getImageFromLink(element.img);
+    //           this.filteredList.push({
+    //             empNo:element.empNo,
+    //             employeeId:element.employeeId,
+    //             img:url.url,
+    //             name:element.name
+    //           })
+    //           loader.dismiss();
+    //         }else{
+    //           this.filteredList.push({
+    //             empNo:element.empNo,
+    //             employeeId:element.employeeId,
+    //             img:null,
+    //             name:element.name
+    //           })
+    //           loader.dismiss();
+    //         }
+    //       }
+    //     }else{
+    //       loader.dismiss();
+    //     }
         
-      }else{
-        this.notification.errorNotification(res['code'],res['msg']);
-        loader.dismiss();
-      }
-    }
+    //   }else{
+    //     this.notification.errorNotification(res['code'],res['msg']);
+    //     loader.dismiss();
+    //   }
+    // }
   }
 
   async getDepartment(){
@@ -136,10 +141,10 @@ export class EmployeePage implements OnInit {
     if(res['code'] == 0){
       this.departmentList =  res['data'];
       this.departmentList.unshift({
-        departmentId:"ALL",
+        departmentId:"",
         departmentName:"ALL"
       });
-      this.selectedDepartment = 'ALL';
+      this.selectedDepartment = '';
       this.getAllEmployee();
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
@@ -240,6 +245,24 @@ export class EmployeePage implements OnInit {
       emp.departmentName.toLowerCase().includes(filterValue.trim().toLowerCase())
       );
     });
+  }
+
+  export(){
+    var ws = XLSX.utils.json_to_sheet(this.employeeList);
+
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "AccessLog");
+
+    var wbout = XLSX.write(wb, {bookType:'xlsx', type:'binary'});
+
+    function s2ab(s) {
+      var buf = new ArrayBuffer(s.length);
+      var view = new Uint8Array(buf);
+      for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+      return buf;
+    };
+
+    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'EmployeeList'+moment().format('YYYYMMDDHHmm') +'.xlsx');
   }
 
 }

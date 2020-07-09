@@ -18,6 +18,7 @@ import { ImageService } from '../services/image.service';
 export class ReportPage implements OnInit {
   p: number = 1;
   searchForm:any;
+  departmentList:any = [];
   searchResults:any =[];
   formattedList:any =[];
   equipmentList:any = [];
@@ -35,6 +36,7 @@ export class ReportPage implements OnInit {
   ngOnInit() {
     this.SetForm();
     this.getEquipment();
+    this.getDepartment();
   }
 
   SetForm(){
@@ -60,6 +62,9 @@ export class ReportPage implements OnInit {
       'selectedEquipment':[
         ''
       ],
+      'selectedDepartment':[
+        ''
+      ]
     })
   }
 
@@ -84,6 +89,26 @@ export class ReportPage implements OnInit {
     loader.dismiss();
   }
 
+  async getDepartment(){
+    let loader = await this.loading.create({
+      message:'Please wait.'
+    });
+    
+    loader.present();
+
+    const res = await this.clientservice.getDepartmentList();
+    if(res['code'] == 0){
+      this.departmentList =  res['data'];
+      this.departmentList.unshift({
+        departmentId:"",
+        departmentName:"ALL"
+      });
+    }else{
+      this.notification.errorNotification(res['code'],res['msg']);
+    }
+    loader.dismiss();
+  }
+
   async search(){
     if(this.searchForm.valid){
       let loader = await this.loading.create({
@@ -96,7 +121,7 @@ export class ReportPage implements OnInit {
   
       let data = {
         equipmentId:form.selectedEquipment,
-        departmentId:'',
+        departmentId:form.selectedDepartment,
         name: form.name ? form.name:'',
         empNo:form.empNo? form.empNo:'',
         nric:form.nric? form.nric:'',

@@ -27,6 +27,16 @@
             </ion-row>
             <ion-row>
               <ion-col>
+                Department:
+                <mat-select id="department" formControlName="selectedDepartment">
+                  <mat-option *ngFor="let id of departmentList" [value]="id.departmentId">
+                    {{id.departmentName}}
+                  </mat-option>
+                </mat-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
                 <div>Name</div>
                 <ion-input formControlName="name" class="input-style"></ion-input>
               </ion-col>
@@ -76,7 +86,7 @@
       <ion-col>Employee No</ion-col>
       <ion-col>Department</ion-col>
       <ion-col>Access Time</ion-col>
-      <ion-col>Temperature</ion-col>
+      <ion-col size="1">Temp</ion-col>
     </ion-row>
     <ion-row *ngFor="let item of formattedList | paginate: { itemsPerPage: 100, currentPage: p }">
       <ion-col size="2">
@@ -95,8 +105,8 @@
       <ion-col>
         <div>{{item.accessTime}}</div>
       </ion-col>
-      <ion-col>
-        <div [ngClass]="{'highlight': item.alert == true }">{{item.temperature}}</div>
+      <ion-col size="1">
+        <div style="padding:0 6px" [ngClass]="{'highlight': item.alert == true }">{{item.temperature}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

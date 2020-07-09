@@ -35,7 +35,11 @@ export class BindemployeeComponent implements OnInit {
     
     loader.present();
 
-    const res = await this.clientservice.getAllEmployees();
+    let data ={
+      departmentId:'',
+      detail:0
+    }
+    const res = await this.clientservice.getAllEmployees(data);
       if(res['code'] == 0){
         this.employeeList =  res['data'];
         this.filteredList = this.employeeList;

@@ -15,7 +15,7 @@
         <!-- <ion-button fill="solid" color="warning" (click)="logout()">Logout</ion-button> -->
         <p>{{getLoginID()}}</p>
         <mat-select class="usermenu">
-          <mat-option *ngIf="!isAdmin" (click)="EditCompany()">
+          <mat-option *ngIf="isAdmin != null" (click)="EditCompany()">
             Edit Company
           </mat-option>
           <mat-option (click)="Profile()">

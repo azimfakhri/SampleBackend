@@ -52,6 +52,9 @@ export class PublicPage implements OnInit {
       }
     }else{
       this.notification.errorNotification(res['code'],res['msg']);
+      this.needupload = false;
+      this.nric = '';
+      this.name = '';
     }
     loader.dismiss();
   }
@@ -74,6 +77,10 @@ export class PublicPage implements OnInit {
       this.previewUrl = reader.result; 
     }
   }
+  
+  check(event){
+    console.log(event);
+  }
 
   async proceed(){
     if(this.fileData){
@@ -92,6 +99,7 @@ export class PublicPage implements OnInit {
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.UploadSuccess);
        this.needupload = false;
        this.nric = '';
+       this.name = '';
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
       }

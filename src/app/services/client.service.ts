@@ -41,8 +41,10 @@ export class ClientService {
     return res;
   }
 
-  async getAllEmployees(){
-    const res = await this.http.get(this.URL_API + '/manage/getAllEmployees', { responseType: 'json'}).toPromise()
+  async getAllEmployees(data){
+    const res = await this.http.get(this.URL_API + '/manage/getEmployees', {
+      params:data
+    }).toPromise()
      .catch(err => { console.log(err);
     });
 

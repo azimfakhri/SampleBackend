@@ -5,12 +5,18 @@
     <mat-divider></mat-divider>
   </div>
 
-  <div>
+  <div style="padding: 15px 0;">
     <button mat-flat-button class="btn-margin-right addfilter" (click)="AddEmployee()" color="primary"  aria-label="add employee">
       <mat-icon>add_circle_outline</mat-icon> Add Employee
     </button>
     <button mat-flat-button class="btn-margin-right addfilter" (click)="AddEmployeeBatch()" color="primary"  aria-label="add bulk">
       <mat-icon>arrow_circle_up</mat-icon> Add Employee by Batch
+    </button>
+    <button mat-flat-button class="btn-margin-right addfilter" (click)="export()" color="primary"  aria-label="export employee">
+      <mat-icon>arrow_circle_down</mat-icon> Export Employee
+    </button>
+    <button mat-flat-button class="btn-margin-right addfilter" (click)="AddEmployeeBatch()" color="primary"  aria-label="update bulk">
+      <mat-icon>update</mat-icon> Update Employee by Batch
     </button>
   </div>
 

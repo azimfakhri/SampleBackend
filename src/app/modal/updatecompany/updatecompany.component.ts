@@ -97,7 +97,7 @@ export class UpdatecompanyComponent implements OnInit {
 
       if(res['code'] == 0){
        this.notification.alertNotification(config.message.alert.Success,config.message.alert.SuccessMsgUpdate);
-       this.modalCtrl.dismiss(true);
+       this.modalCtrl.dismiss(res['data'][0]);
       }else{
         this.notification.errorNotification(res['code'],res['msg']);
       }

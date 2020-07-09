@@ -25,7 +25,7 @@ export class AppComponent {
   idleState:string = 'Not started.';
   timedOut:boolean = false;
   lastPing?: Date = null;
-  isAdmin:boolean = true;
+  isAdmin:boolean =null;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -114,12 +114,10 @@ export class AppComponent {
   }
 
   getLoginID(){
-    if(this.CheckLoggedIn()){
-      if(sessionStorage.getItem('usertype') == '2'){
-        this.isAdmin = false;
-      }
-      return sessionStorage.getItem('userFullName');
+    if(sessionStorage.getItem('usertype') === '2'){
+      this.isAdmin = false;
     }
+    return sessionStorage.getItem('userFullName');
   }
 
   async refreshToken(){
@@ -128,6 +126,8 @@ export class AppComponent {
   }
 
   logout(){
+    this.isAdmin = null;
+    this.isLoggedin = false;
     this.authservice.logout();
   }
 
@@ -165,11 +165,9 @@ export class AppComponent {
     });
     modal.onDidDismiss()
     .then((res) => {
-      if(res['data']){
-        console.log(res);
+      if(res['data']){ 
+        sessionStorage.setItem('companyLogo', res['data'].logo);
       }
-      
-     
     });
     return await modal.present();
   }
