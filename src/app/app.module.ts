@@ -41,6 +41,7 @@ import {
   ɵb,
 } from "ng-material-multilevel-menu";
 import { UpdatecompanyComponent } from './modal/updatecompany/updatecompany.component';
+import { UpdatebatchemployeeComponent } from './modal/updatebatchemployee/updatebatchemployee.component';
 
 
 export function tokenGetter() {
@@ -62,7 +63,8 @@ export function tokenGetter() {
     BindequipmentComponent,
     BindemployeeComponent,
     AddbatchemployeeComponent,
-    UpdatecompanyComponent
+    UpdatecompanyComponent,
+    UpdatebatchemployeeComponent
   ],
   entryComponents: [
     AdditionaldriverComponent,
@@ -78,7 +80,8 @@ export function tokenGetter() {
     BindequipmentComponent,
     BindemployeeComponent,
     AddbatchemployeeComponent,
-    UpdatecompanyComponent
+    UpdatecompanyComponent,
+    UpdatebatchemployeeComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule, ReactiveFormsModule,
     LayoutModule,

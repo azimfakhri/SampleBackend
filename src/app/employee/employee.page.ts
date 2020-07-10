@@ -10,6 +10,7 @@ import { ImageService } from '../services/image.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import * as moment from 'moment';
+import { UpdatebatchemployeeComponent } from '../modal/updatebatchemployee/updatebatchemployee.component';
 
 @Component({
   selector: 'app-employee',
@@ -20,6 +21,7 @@ export class EmployeePage implements OnInit {
   departmentList: any = [];
   employeeList:any = [];
   filteredList:any = [];
+  exportlist:any = [];
 
   selectedDepartment:any;
   selectedDepartmentName:any;
@@ -186,6 +188,23 @@ export class EmployeePage implements OnInit {
     return await modal.present();
   }
 
+  async UpdateEmployeeBatch(){
+    const modal = await this.modalCtrl.create({
+      component: UpdatebatchemployeeComponent,
+      backdropDismiss:false,
+      cssClass:'auto-height',
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      if(res['data']){
+        this.getDepartment();
+      }
+      
+     
+    });
+    return await modal.present();
+  }
+
   async ViewEmployee(emp){
     const modal = await this.modalCtrl.create({
       component: ViewupdateEmployeeComponent,
@@ -248,7 +267,40 @@ export class EmployeePage implements OnInit {
   }
 
   export(){
-    var ws = XLSX.utils.json_to_sheet(this.employeeList);
+    this.exportlist = [];
+    for (let index = 0; index < this.employeeList.length; index++) {
+      const element = this.employeeList[index];
+
+      let ex = {
+        employeeId: element.employeeId,
+        department: element.departmentName,
+        name: element.name,
+        phone: element.phone,
+        sex: element.sex,
+        empNo: element.empNo,
+        nric: element.nric,
+        address: element.address
+      }
+
+      this.exportlist.push(ex);      
+    }
+    var ws = XLSX.utils.json_to_sheet(this.exportlist);
+
+    /* get worksheet range */
+    var range = XLSX.utils.decode_range(ws['!ref']);
+    for(var R = range.s.r; R <= range.e.r; ++R) {
+      for(var C = range.s.c; C <= range.e.c; ++C) {
+        var cell_address = {c:C, r:R};
+        /* if an A1-style address is needed, encode the address */
+        var ref = XLSX.utils.encode_cell(cell_address);
+        //console.log(ws[ref]);
+        if(!ws[ref]) continue;
+        ws[ref].t = 's';
+        ws[ref].z = '@';
+
+        XLSX.utils.format_cell(ws[ref]);
+      }
+    }
 
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "AccessLog");
