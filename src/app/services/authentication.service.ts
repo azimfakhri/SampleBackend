@@ -133,7 +133,6 @@ export class AuthenticationService {
   }
 
   async refreshToken(){
-    console.log(sessionStorage.getItem('user-token'));
     const res = await this.http.get(this.URL_API + '/account/refreshToken', { responseType: 'json'}).toPromise()
      .catch(err => { 
        console.log(err);

@@ -48,16 +48,19 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
+    path: 'report-employee',
+    loadChildren: () => import('./report-employee/report-employee.module').then( m => m.ReportEmployeePageModule),
+    canActivate:[AuthGuardService]
+  },
+  {
     path: 'public',
     loadChildren: () => import('./public/public.module').then( m => m.PublicPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
-    path: 'report-employee',
-    loadChildren: () => import('./report-employee/report-employee.module').then( m => m.ReportEmployeePageModule)
   },
+  
 
 
 

@@ -291,9 +291,7 @@ export class EmployeePage implements OnInit {
     for(var R = range.s.r; R <= range.e.r; ++R) {
       for(var C = range.s.c; C <= range.e.c; ++C) {
         var cell_address = {c:C, r:R};
-        /* if an A1-style address is needed, encode the address */
         var ref = XLSX.utils.encode_cell(cell_address);
-        //console.log(ws[ref]);
         if(!ws[ref]) continue;
         ws[ref].t = 's';
         ws[ref].z = '@';

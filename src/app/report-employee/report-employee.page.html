@@ -1,9 +1,103 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>reportEmployee</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="padding-content">
 
-<ion-content>
+  <h4>Employee Attendance Report</h4>
+  
+  <div class="divider-padding">
+    <mat-divider></mat-divider>
+  </div>
+  
+    <mat-accordion #accordion="matAccordion">
+      <mat-expansion-panel [expanded]="isOpen == true" (closed)="isOpen = false" (opened)="isOpen = true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Search
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="searchForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Department:
+                <mat-select id="department" formControlName="selectedDepartment">
+                  <mat-option *ngFor="let id of departmentList" [value]="id.departmentId">
+                    {{id.departmentName}}
+                  </mat-option>
+                </mat-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div>Name</div>
+                <ion-input formControlName="name" class="input-style"></ion-input>
+              </ion-col>
+              <ion-col>
+                <div>Employee Number</div>
+                <ion-input formControlName="empNo" class="input-style"></ion-input>
+              </ion-col>
+              <ion-col>
+                <div>NRIC/Passport Number</div>
+                <ion-input formControlName="nric" class="input-style"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4">
+                <div>Access Date</div>
+                <input class="dtpicker input-style" [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" formControlName="date" >
+              </ion-col>
+              <ion-col size="4">
+                <div>Order By</div>
+                <mat-radio-group formControlName="order">
+                  <mat-radio-button value="ASC">Ascending</mat-radio-button>
+                  <mat-radio-button value="DESC">Descending</mat-radio-button>
+                </mat-radio-group>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button class="proceed-btn-form" type="button" (click)="search()">Search</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+        <mat-datepicker #myDatepicker></mat-datepicker>
+        <mat-datepicker #myDatepicker2></mat-datepicker>
+      </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
 
+  <ion-grid style="margin-top:20px;">
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>Name</ion-col>
+      <ion-col>Employee No</ion-col>
+      <ion-col>Department</ion-col>
+      <ion-col>First Entry</ion-col>
+      <ion-col>Last Entry</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of formattedList | paginate: { itemsPerPage: 100, currentPage: p }">
+      <ion-col size="2">
+        <img matListAvatar *ngIf="item.img" [src]="item.img" height="100">
+        <div matListAvatar *ngIf="!item.img"><mat-icon class="fallbackicon">perm_identity</mat-icon></div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.name}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.employeeNo}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.department}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.firstEntry}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.lastEntry}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="float: right;">
+    <pagination-controls (pageChange)="p = $event;changePage($event);"></pagination-controls>
+    <ion-button *ngIf="searchResults.length > 0" class="proceed-btn-form" type="button" (click)="export()">Export</ion-button>
+  </div>
 </ion-content>

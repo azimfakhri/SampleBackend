@@ -77,10 +77,6 @@ export class PublicPage implements OnInit {
       this.previewUrl = reader.result; 
     }
   }
-  
-  check(event){
-    console.log(event);
-  }
 
   async proceed(){
     if(this.fileData){

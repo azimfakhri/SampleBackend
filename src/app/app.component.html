@@ -3,14 +3,13 @@
 <ion-app>
   <ion-header *ngIf="isLoggedin">
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <!-- <ion-buttons slot="start">
         <ion-button color="primary" (click)="sideNav.toggle()"><ion-icon slot="icon-only" name="menu"></ion-icon></ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
       <!-- <img slot="start" src="assets/logo.svg" width="30px" style="display:inline-block" height="30px"/> -->
       <ion-title slot="start">
         MTS 
       </ion-title>
-      <ion-label>*Testing Environment*</ion-label>
       <ion-buttons slot="end">
         <!-- <ion-button fill="solid" color="warning" (click)="logout()">Logout</ion-button> -->
         <p>{{getLoginID()}}</p>

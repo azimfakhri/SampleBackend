@@ -140,7 +140,7 @@ export class ClientService {
   }
 
   async getAccessByEquipment(data){
-    const res = await this.http.get(this.URL_API + '/report/getAccessRecord/', {
+    const res = await this.http.get(this.URL_API + '/report/getAccessRecord', {
       params:data
     }).toPromise()
      .catch(err => { console.log(err);
@@ -149,4 +149,13 @@ export class ClientService {
     return res;
   }
 
+  async getEmployeesAccesses(data){
+    const res = await this.http.get(this.URL_API + '/report/getEmployeesAccesses', {
+      params:data
+    }).toPromise()
+     .catch(err => { console.log(err);
+    });
+
+    return res;
+  }
 }

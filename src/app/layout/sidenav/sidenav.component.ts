@@ -68,8 +68,20 @@ export class SidenavComponent implements OnInit {
       {
         label: 'Report',
         icon: 'assessment',
-        link: 'report'
+        items: [
+          {
+            label: 'Access Report',
+            icon: 'assignment_late',
+            link: 'report'
+          },
+          {
+            label: 'Attendance Report',
+            link: 'report-employee',
+            icon: 'assignment_ind'
+          }
+        ]
       },
+      
       
     ];
 
@@ -82,7 +94,7 @@ export class SidenavComponent implements OnInit {
 
 
   selectedItem(event){
-    console.log(event);
+    //console.log(event);
   }
 
   
