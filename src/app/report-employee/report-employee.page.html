@@ -1,6 +1,6 @@
 <ion-content class="padding-content">
 
-  <h4>Employee Attendance Report</h4>
+  <h4>Attendance Report</h4>
   
   <div class="divider-padding">
     <mat-divider></mat-divider>
@@ -69,10 +69,11 @@
     <ion-row>
       <ion-col size="2"></ion-col>
       <ion-col>Name</ion-col>
+      <ion-col>NRIC/Passport</ion-col>
       <ion-col>Employee No</ion-col>
       <ion-col>Department</ion-col>
-      <ion-col>First Entry</ion-col>
-      <ion-col>Last Entry</ion-col>
+      <ion-col>Check In</ion-col>
+      <ion-col>Check Out</ion-col>
     </ion-row>
     <ion-row *ngFor="let item of formattedList | paginate: { itemsPerPage: 100, currentPage: p }">
       <ion-col size="2">
@@ -81,6 +82,9 @@
       </ion-col>
       <ion-col>
         <div>{{item.name}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.nric}}</div>
       </ion-col>
       <ion-col>
         <div>{{item.employeeNo}}</div>

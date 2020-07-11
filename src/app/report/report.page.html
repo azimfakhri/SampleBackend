@@ -1,6 +1,6 @@
 <ion-content class="padding-content">
 
-  <h4>Equipment Access Report</h4>
+  <h4>Access Records Report</h4>
   
   <div class="divider-padding">
     <mat-divider></mat-divider>
@@ -83,6 +83,7 @@
     <ion-row>
       <ion-col size="2"></ion-col>
       <ion-col>Name</ion-col>
+      <ion-col>NRIC/Passport</ion-col>
       <ion-col>Employee No</ion-col>
       <ion-col>Department</ion-col>
       <ion-col>Access Time</ion-col>
@@ -95,6 +96,9 @@
       </ion-col>
       <ion-col>
         <div>{{item.name}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{item.nric}}</div>
       </ion-col>
       <ion-col>
         <div>{{item.employeeNo}}</div>

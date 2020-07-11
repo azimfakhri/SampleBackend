@@ -70,12 +70,12 @@ export class SidenavComponent implements OnInit {
         icon: 'assessment',
         items: [
           {
-            label: 'Access Report',
+            label: 'Access Records',
             icon: 'assignment_late',
             link: 'report'
           },
           {
-            label: 'Attendance Report',
+            label: 'Attendance',
             link: 'report-employee',
             icon: 'assignment_ind'
           }

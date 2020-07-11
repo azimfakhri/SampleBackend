@@ -119,7 +119,7 @@ export class ReportEmployeePage implements OnInit {
                 name: element.name,
                 firstEntry: element.firstEntry,
                 lastEntry: element.lastEntry,
-                employeeNo: element.employeeNo,
+                employeeNo: element.empNo,
                 nric: element.nric,
                 img: url.url,
                 department: element.department
@@ -129,7 +129,7 @@ export class ReportEmployeePage implements OnInit {
                 name: element.name,
                 firstEntry: element.firstEntry,
                 lastEntry: element.lastEntry,
-                employeeNo: element.employeeNo,
+                employeeNo: element.empNo,
                 nric: element.nric,
                 img: null,
                 department: element.department
@@ -173,7 +173,7 @@ export class ReportEmployeePage implements OnInit {
       return buf;
     };
 
-    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'AccessLog'+moment().format('YYYYMMDDHHmm') +'.xlsx');
+    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'AttendanceList'+moment().format('YYYYMMDDHHmm') +'.xlsx');
   }
 
 }
