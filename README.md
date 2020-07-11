@@ -3,10 +3,15 @@ MTS
 
 Client Side and Admin System for Thermal Scanner
 
-Steps to deploy:
+## Steps to run locally:
+1.  Open terminal and run
+    ```
+        ionic serve
+    ```
 
+## Steps to deploy:
 1.  Open terminal and run 
-    ```javascript
+    ```
         ionic build --prod
     ```
 2.  Files will be build in {project path}/www
