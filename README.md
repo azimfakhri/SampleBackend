@@ -1,7 +1,7 @@
-# Metronic AI Thermal Scanner
-MTS
+# AFTECH Backend
+Everaftech
 
-Client Side and Admin System for Thermal Scanner
+Admin template
 
 ## Steps to run locally:
 1.  Open terminal and run
