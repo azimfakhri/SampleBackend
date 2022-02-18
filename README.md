@@ -1,5 +1,4 @@
-# AFTECH Backend
-Everaftech
+# Angular Admin Panel
 
 Admin template
 
